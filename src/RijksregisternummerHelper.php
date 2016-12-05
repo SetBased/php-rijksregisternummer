@@ -295,7 +295,7 @@ class RijksregisternummerHelper
         $month += 40;
         break;
 
-      case self::TYPE_SELF_ASSIGNED;
+      case self::TYPE_SELF_ASSIGNED:
         $month += 60;
         break;
 
