@@ -1,0 +1,31 @@
+{
+  "name": "setbased/rijksregisternummer",
+  "description": "Library for handling identification numbers of the National Register of Belgium (Rijksregisternummer)",
+  "keyword": [
+    "Rijksregisternummer",
+    "bisnummer",
+    "bis-nummer",
+    "BIS"
+  ],
+  "authors": [
+    {
+      "name": "Paul Water",
+      "email": "p.r.water@setbased.nl",
+      "homepage": "http://www.setbased.nl"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "setbased/phing-extensions": "2.*"
+  },
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Rijksregisternummer\\": "src"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}

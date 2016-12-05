@@ -1,0 +1,49 @@
+<project name="OnzeRrelaties" default="build" basedir=".">
+    <taskdef name="ReadSemanticVersion" classname="vendor.setbased.phing-extensions.src.Task.ReadSemanticVersionTask"/>
+    <property name="JS_DIR" value="www/js"/>
+    <property name="VERSION" value="0.0.0"/>
+    <property name="RELEASE" value="0.0.0"/>
+    <property name="PRE_RELEASE" value=""/>
+
+    <!-- Runs all unit tests -->
+    <target name="unit">
+        <exec command="bin/phpunit --bootstrap=test/bootstrap.php test" passthru="true" checkreturn="true"/>
+    </target>
+
+    <!-- Creates a new version/release. -->
+    <target name="version">
+        <ReadSemanticVersion file=".version"
+                             versionProperty="VERSION"
+                             releaseProperty="RELEASE"
+                             preReleaseProperty="PRE_RELEASE"
+                             haltOnError="true"/>
+
+        <if>
+            <equals arg1="${PRE_RELEASE}" arg2=""/>
+            <then>
+                <property name="RPM_RELEASE" value="1%{?dist}"/>
+            </then>
+            <else>
+                <property name="RPM_RELEASE" value="${PRE_RELEASE}%{?dist}"/>
+            </else>
+        </if>
+
+        <reflexive>
+            <fileset dir=".">
+                <include name="onzerelaties.spec"/>
+            </fileset>
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="Version: .*" replace="Version: ${RELEASE}"/>
+                    <regexp pattern="Release: .*" replace="Release: ${RPM_RELEASE}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+        <gitcommit repository="." message="Release: ${VERSION}" allFiles="true"/>
+        <gitpush repository="."/>
+        <gittag repository="." name="${VERSION}"/>
+        <gitpush repository="." refspec="${VERSION}" quiet="false"/>
+    </target>
+
+    <target name="build"/>
+</project>
