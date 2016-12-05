@@ -2,6 +2,8 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Rijksregisternummer;
 
+use SetBased\Exception\FallenException;
+
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Utility class for identification number of the National Register (Rijksregisternummer), see @link
@@ -281,6 +283,7 @@ class RijksregisternummerHelper
     switch ($type)
     {
       case self::TYPE_RIJKSREGISTERNUMMER:
+        // Nothing to do.
         ;
         break;
 
@@ -295,6 +298,9 @@ class RijksregisternummerHelper
       case self::TYPE_SELF_ASSIGNED;
         $month += 60;
         break;
+
+      default:
+        throw new FallenException('type', $type);
     }
 
     return $month;
@@ -310,20 +316,30 @@ class RijksregisternummerHelper
    */
   private static function readjustMonth($month)
   {
-    if (21<=$month && $month<=32)
+    switch (true)
     {
-      // The rijksregisternummer is a bisnummer and gender is unknown.
-      $month -= 20;
-    }
-    elseif (41<=$month && $month<=52)
-    {
-      // The rijksregisternummer is a bisnummer and gender is known.
-      $month -= 40;
-    }
-    else if (61<=$month && $month<=72)
-    {
-      // The rijksregisternummer is self assigned.
-      $month -= 60;
+      case 1<=$month && $month<=12:
+        // A normal rijksregisternummer.
+        ;
+        break;
+
+      case 21<=$month && $month<=32:
+        // The rijksregisternummer is a bisnummer and gender is unknown.
+        $month -= 20;
+        break;
+
+      case 41<=$month && $month<=52:
+        // The rijksregisternummer is a bisnummer and gender is known.
+        $month -= 40;
+        break;
+
+      case 61<=$month && $month<=72:
+        // The rijksregisternummer is self assigned.
+        $month -= 60;
+        break;
+
+      default:
+        throw new FallenException('month', $month);
     }
 
     return $month;
