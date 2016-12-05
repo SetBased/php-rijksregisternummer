@@ -1,4 +1,6 @@
 /.idea/
 /bin/
-/vendor/
 /composer.lock
+/test/coverage.xml
+/test/report
+/vendor/

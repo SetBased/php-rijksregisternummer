@@ -7,7 +7,7 @@
 
     <!-- Runs all unit tests -->
     <target name="unit">
-        <exec command="bin/phpunit --bootstrap=test/bootstrap.php test" passthru="true" checkreturn="true"/>
+        <exec command="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
 
     <!-- Creates a new version/release. -->
