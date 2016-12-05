@@ -7,6 +7,7 @@
     "bis-nummer",
     "BIS"
   ],
+  "license": "MIT",
   "authors": [
     {
       "name": "Paul Water",
