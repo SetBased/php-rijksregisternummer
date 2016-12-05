@@ -19,6 +19,8 @@
     "setbased/phing-extensions": "2.*"
   },
   "require": {
+    "php": ">=5.4.0",
+    "setbased/exception": "1.*"
   },
   "autoload": {
     "psr-4": {
