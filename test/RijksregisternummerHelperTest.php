@@ -1,14 +1,15 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace Helper;
+namespace SetBased\Rijksregisternummer\Test;
 
+use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\RijksregisternummerHelper;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Test cases for BelgiumRegister.
  */
-class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
+class RijksregisternummerHelperTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -16,7 +17,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testClean01()
   {
-    $this->assertSame(null, RijksregisternummerHelper::clean(null));
+    self::assertSame(null, RijksregisternummerHelper::clean(null));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testClean02()
   {
-    $this->assertSame(null, RijksregisternummerHelper::clean(''));
+    self::assertSame(null, RijksregisternummerHelper::clean(''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testClean03()
   {
-    $this->assertSame('66041066600', RijksregisternummerHelper::clean('66.04.10-666.00'));
+    self::assertSame('66041066600', RijksregisternummerHelper::clean('66.04.10-666.00'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testClean04()
   {
-    $this->assertSame('66041066600', RijksregisternummerHelper::clean('66041066600'));
+    self::assertSame('66041066600', RijksregisternummerHelper::clean('66041066600'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -52,7 +53,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testClean05()
   {
-    $this->assertSame('66041066600', RijksregisternummerHelper::clean("660 41\n0666-00\x08", '/\D/'));
+    self::assertSame('66041066600', RijksregisternummerHelper::clean("660 41\n0666-00\x08", '/\D/'));
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -61,40 +62,40 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
   public function testComputeCheckDigits()
   {
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10', 666);
-    $this->assertSame('60', $check);
+    self::assertSame('60', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10', 997);
-    $this->assertSame('20', $check);
+    self::assertSame('20', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            666,
                                                            RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER);
-    $this->assertSame('06', $check);
+    self::assertSame('06', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            997,
                                                            RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER);
-    $this->assertSame('63', $check);
+    self::assertSame('63', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            666,
                                                            RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER);
-    $this->assertSame('49', $check);
+    self::assertSame('49', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            997,
                                                            RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER);
-    $this->assertSame('09', $check);
+    self::assertSame('09', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            666,
                                                            RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    $this->assertSame('92', $check);
+    self::assertSame('92', $check);
 
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
                                                            997,
                                                            RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    $this->assertSame('52', $check);
+    self::assertSame('52', $check);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -103,7 +104,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testFormat01()
   {
-    $this->assertSame(null, RijksregisternummerHelper::format(null));
+    self::assertSame(null, RijksregisternummerHelper::format(null));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -112,7 +113,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testFormat02()
   {
-    $this->assertSame('', RijksregisternummerHelper::format(''));
+    self::assertSame('', RijksregisternummerHelper::format(''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -121,7 +122,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testFormat03()
   {
-    $this->assertSame('66.04.10-666.00', RijksregisternummerHelper::format('66041066600'));
+    self::assertSame('66.04.10-666.00', RijksregisternummerHelper::format('66041066600'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -130,7 +131,7 @@ class RijksregisternummerHelperTest extends \PHPUnit_Framework_TestCase
    */
   public function testFormat04()
   {
-    $this->assertSame('Rare jongens, die Romeinen', RijksregisternummerHelper::format('Rare jongens, die Romeinen'));
+    self::assertSame('Rare jongens, die Romeinen', RijksregisternummerHelper::format('Rare jongens, die Romeinen'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

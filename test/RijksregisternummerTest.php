@@ -1,14 +1,15 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace Helper;
+namespace SetBased\Rijksregisternummer\Test;
 
+use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\Rijksregisternummer;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Test cases for Rijksregisternummer.
  */
-class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
+class RijksregisternummerTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -17,10 +18,10 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testBirthday()
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
-    $this->assertSame('1966-04-10', $rijksregisternummer->getBirthday());
+    self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertSame('1966-04-10', $rijksregisternummer->getBirthday());
+    self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -29,28 +30,28 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testGender()
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertSame('F', $rijksregisternummer->getGender());
+    self::assertSame('F', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-997.20');
-    $this->assertSame('M', $rijksregisternummer->getGender());
+    self::assertSame('M', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.24.10-666.06');
-    $this->assertSame('', $rijksregisternummer->getGender());
+    self::assertSame('', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.24.10-997.63');
-    $this->assertSame('', $rijksregisternummer->getGender());
+    self::assertSame('', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.44.10-666.49');
-    $this->assertSame('F', $rijksregisternummer->getGender());
+    self::assertSame('F', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.44.10-997.09');
-    $this->assertSame('M', $rijksregisternummer->getGender());
+    self::assertSame('M', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
-    $this->assertSame('F', $rijksregisternummer->getGender());
+    self::assertSame('F', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.64.10-997.52');
-    $this->assertSame('M', $rijksregisternummer->getGender());
+    self::assertSame('M', $rijksregisternummer->getGender());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,10 +61,10 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testHumanFormat()
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertSame('66.04.10-666.60', $rijksregisternummer->humanFormat());
+    self::assertSame('66.04.10-666.60', $rijksregisternummer->humanFormat());
 
     $rijksregisternummer = new Rijksregisternummer('93051822361');
-    $this->assertSame('93.05.18-223.61', $rijksregisternummer->humanFormat());
+    self::assertSame('93.05.18-223.61', $rijksregisternummer->humanFormat());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -128,16 +129,16 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testIsBis()
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
-    $this->assertFalse($rijksregisternummer->isBis());
+    self::assertFalse($rijksregisternummer->isBis());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertFalse($rijksregisternummer->isBis());
+    self::assertFalse($rijksregisternummer->isBis());
 
     $rijksregisternummer = new Rijksregisternummer('66.24.10-666.06');
-    $this->assertTrue($rijksregisternummer->isBis());
+    self::assertTrue($rijksregisternummer->isBis());
 
     $rijksregisternummer = new Rijksregisternummer('66.44.10-666.49');
-    $this->assertTrue($rijksregisternummer->isBis());
+    self::assertTrue($rijksregisternummer->isBis());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -147,16 +148,16 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testIsSelfAssigned()
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
-    $this->assertTrue($rijksregisternummer->isSelfAssigned());
+    self::assertTrue($rijksregisternummer->isSelfAssigned());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertFalse($rijksregisternummer->isSelfAssigned());
+    self::assertFalse($rijksregisternummer->isSelfAssigned());
 
     $rijksregisternummer = new Rijksregisternummer('66.24.10-666.06');
-    $this->assertFalse($rijksregisternummer->isSelfAssigned());
+    self::assertFalse($rijksregisternummer->isSelfAssigned());
 
     $rijksregisternummer = new Rijksregisternummer('66.44.10-666.49');
-    $this->assertFalse($rijksregisternummer->isSelfAssigned());
+    self::assertFalse($rijksregisternummer->isSelfAssigned());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -166,10 +167,10 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testMachineFormat()
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertSame('66041066660', $rijksregisternummer->machineFormat());
+    self::assertSame('66041066660', $rijksregisternummer->machineFormat());
 
     $rijksregisternummer = new Rijksregisternummer('93051822361');
-    $this->assertSame('93051822361', $rijksregisternummer->machineFormat());
+    self::assertSame('93051822361', $rijksregisternummer->machineFormat());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -179,10 +180,10 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testToString()
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
-    $this->assertSame('66.04.10-666.60', (string)$rijksregisternummer);
+    self::assertSame('66.04.10-666.60', (string)$rijksregisternummer);
 
     $rijksregisternummer = new Rijksregisternummer('93051822361');
-    $this->assertSame('93.05.18-223.61', (string)$rijksregisternummer);
+    self::assertSame('93.05.18-223.61', (string)$rijksregisternummer);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -192,10 +193,10 @@ class RijksregisternummerTest extends \PHPUnit_Framework_TestCase
   public function testValid01()
   {
     new Rijksregisternummer('66.04.10-666.60');
-    $this->assertTrue(true);
+    self::assertTrue(true);
 
     new Rijksregisternummer('93051822361');
-    $this->assertTrue(true);
+    self::assertTrue(true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
