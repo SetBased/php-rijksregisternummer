@@ -16,10 +16,10 @@
 <a href="https://gitter.im/SetBased/php-rijksregisternummer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/SetBased/php-rijksregisternummer.svg" alt="Gitter"/></a>
 </td>
 <td>
-<a href="https://packagist.org/packages/setbased/php-rijksregisternummer"><img src="https://poser.pugx.org/setbased/php-rijksregisternummer/license" alt="License"/></a>
+<a href="https://packagist.org/packages/setbased/php-rijksregisternummer"><img src="https://poser.pugx.org/setbased/rijksregisternummer/license" alt="License"/></a>
 </td>
 <td>
-<a href="https://packagist.org/packages/setbased/php-rijksregisternummer"><img src="https://poser.pugx.org/setbased/php-rijksregisternummer/v/stable" alt="Latest Stable Version"/></a>
+<a href="https://packagist.org/packages/setbased/php-rijksregisternummer"><img src="https://poser.pugx.org/setbased/rijksregisternummer/v/stable" alt="Latest Stable Version"/></a>
 </td>
 <td>
 <a href="https://travis-ci.org/SetBased/php-rijksregisternummer"><img src="https://travis-ci.org/SetBased/php-rijksregisternummer.svg?branch=master" alt="Build Status"/></a><br/>
