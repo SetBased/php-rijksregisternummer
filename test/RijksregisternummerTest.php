@@ -22,7 +22,11 @@ class RijksregisternummerTest extends TestCase
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
+
+    $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
+    self::assertSame('2001-02-03', $rijksregisternummer->getBirthday());
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Tests for extracting gender.
@@ -51,6 +55,9 @@ class RijksregisternummerTest extends TestCase
     self::assertSame('F', $rijksregisternummer->getGender());
 
     $rijksregisternummer = new Rijksregisternummer('66.64.10-997.52');
+    self::assertSame('M', $rijksregisternummer->getGender());
+
+    $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
     self::assertSame('M', $rijksregisternummer->getGender());
   }
 
@@ -145,6 +152,9 @@ class RijksregisternummerTest extends TestCase
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertFalse($rijksregisternummer->isBis());
 
+    $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
+    self::assertFalse($rijksregisternummer->isBis());
+
     $rijksregisternummer = new Rijksregisternummer('66.24.10-666.06');
     self::assertTrue($rijksregisternummer->isBis());
 
@@ -169,6 +179,9 @@ class RijksregisternummerTest extends TestCase
 
     $rijksregisternummer = new Rijksregisternummer('66.44.10-666.49');
     self::assertFalse($rijksregisternummer->isSelfAssigned());
+
+    $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
+    self::assertFalse($rijksregisternummer->isSelfAssigned());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,6 +195,9 @@ class RijksregisternummerTest extends TestCase
 
     $rijksregisternummer = new Rijksregisternummer('93051822361');
     self::assertSame('93051822361', $rijksregisternummer->machineFormat());
+
+    $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
+    self::assertSame('01020300566', $rijksregisternummer->machineFormat());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

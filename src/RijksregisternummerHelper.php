@@ -219,7 +219,7 @@ class RijksregisternummerHelper
   public static function isValid($rijksregisternummer)
   {
     // Test the rijksregisternummer has only digits.
-    if ($rijksregisternummer!=filter_var($rijksregisternummer, FILTER_VALIDATE_INT))
+    if (preg_match('/^\d+$/', $rijksregisternummer)!=1)
     {
       return false;
     }
