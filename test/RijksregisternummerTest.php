@@ -124,6 +124,17 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test with an invalid rijksregisternummer (to many digits).
+   *
+   * @expectedException \UnexpectedValueException
+   */
+  public function testInvalid06()
+  {
+    new Rijksregisternummer('660508123456');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Tests for is bisnummer.
    */
   public function testIsBis()

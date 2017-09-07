@@ -4,7 +4,6 @@ namespace SetBased\Rijksregisternummer;
 
 use SetBased\Exception\FallenException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Utility class for identification number of the National Register (Rijksregisternummer), see @link
  * https://nl.wikipedia.org/wiki/Rijksregisternummer
@@ -221,12 +220,15 @@ class RijksregisternummerHelper
   {
     // Test the rijksregisternummer has only digits.
     if ($rijksregisternummer!=filter_var($rijksregisternummer, FILTER_VALIDATE_INT))
+    {
+      return false;
+    }
 
-      // Test length is 11.
-      if (strlen($rijksregisternummer)<>11)
-      {
-        return false;
-      }
+    // Test length is 11.
+    if (strlen($rijksregisternummer)<>11)
+    {
+      return false;
+    }
 
     // Test check part.
     $part1 = substr($rijksregisternummer, 0, 9);
