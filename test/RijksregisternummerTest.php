@@ -1,11 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+declare(strict_types=1);
+
 namespace SetBased\Rijksregisternummer\Test;
 
 use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\Rijksregisternummer;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Test cases for Rijksregisternummer.
  */

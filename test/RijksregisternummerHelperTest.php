@@ -1,13 +1,13 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+declare(strict_types=1);
+
 namespace SetBased\Rijksregisternummer\Test;
 
 use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\RijksregisternummerHelper;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
- * Test cases for BelgiumRegister.
+ * Test cases for RijksregisternummerHelper.
  */
 class RijksregisternummerHelperTest extends TestCase
 {
@@ -96,6 +96,11 @@ class RijksregisternummerHelperTest extends TestCase
                                                            997,
                                                            RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
     self::assertSame('52', $check);
+
+    $check = RijksregisternummerHelper::computeCheckDigits('2012-01-20',
+                                                           324,
+                                                           RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
+    self::assertSame('43', $check);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

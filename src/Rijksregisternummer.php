@@ -1,8 +1,8 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+declare(strict_types=1);
+
 namespace SetBased\Rijksregisternummer;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Class for identification number of the National Register (Rijksregisternummer), see @link
  * https://nl.wikipedia.org/wiki/Rijksregisternummer
@@ -21,14 +21,14 @@ class Rijksregisternummer
   /**
    * Object constructor.
    *
-   * @param string $rijksregisternummer  The identification number of the National Register.
-   * @param string $formattingCharacters A regular expression with allowed formatting characters the must be filtered
-   *                                     out. Use '/\D/' the remove all none digits.
+   * @param string|null $rijksregisternummer  The identification number of the National Register.
+   * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
+   *                                          filtered out. Use '/\D/' the remove all none digits.
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct($rijksregisternummer, $formattingCharacters = '/[\.\-\ ]/')
+  public function __construct(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/')
   {
     $cleaned = RijksregisternummerHelper::clean($rijksregisternummer, $formattingCharacters);
     if (!RijksregisternummerHelper::isValid($cleaned))
@@ -49,7 +49,7 @@ class Rijksregisternummer
    * @since 1.0.0
    * @api
    */
-  public function __toString()
+  public function __toString(): string
   {
     return RijksregisternummerHelper::format($this->rijksregisternummer);
   }
@@ -63,7 +63,7 @@ class Rijksregisternummer
    * @since 1.0.0
    * @api
    */
-  public function getBirthday()
+  public function getBirthday(): string
   {
     return RijksregisternummerHelper::getBirthday($this->rijksregisternummer);
   }
@@ -82,7 +82,7 @@ class Rijksregisternummer
    * @since 1.0.0
    * @api
    */
-  public function getGender()
+  public function getGender(): string
   {
     return RijksregisternummerHelper::getGender($this->rijksregisternummer);
   }
@@ -91,10 +91,12 @@ class Rijksregisternummer
   /**
    * Returns this identification number of the National Register in human readable format (yy.mm.dd-nnn.cc).
    *
+   * @return string
+   *
    * @since 1.0.0
    * @api
    */
-  public function humanFormat()
+  public function humanFormat(): string
   {
     return RijksregisternummerHelper::format($this->rijksregisternummer);
   }
@@ -108,7 +110,7 @@ class Rijksregisternummer
    * @since 1.0.0
    * @api
    */
-  public function isBis()
+  public function isBis(): bool
   {
     return RijksregisternummerHelper::isBis($this->rijksregisternummer);
   }
@@ -122,7 +124,7 @@ class Rijksregisternummer
    * @since 1.0.0
    * @api
    */
-  public function isSelfAssigned()
+  public function isSelfAssigned(): bool
   {
     return RijksregisternummerHelper::isSelfAssigned($this->rijksregisternummer);
   }
@@ -131,10 +133,12 @@ class Rijksregisternummer
   /**
    * Returns this identification number of the National Register in machine format, i.e. digits only.
    *
+   * @return string
+   *
    * @since 1.0.0
    * @api
    */
-  public function machineFormat()
+  public function machineFormat(): string
   {
     return $this->rijksregisternummer;
   }
