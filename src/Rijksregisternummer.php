@@ -56,7 +56,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the birthday of this identification number of the National Register.ister.
+   * Returns the birthday of this identification number of the National Register.
    *
    * @return string
    *
@@ -103,7 +103,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if this identification number of the National Register is a bisnummer. Otherwise, returns false.
+   * Returns true if this identification number of the National Register is a bisnummer, false otherwise.
    *
    * @return bool
    *
@@ -117,7 +117,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if this identification number of the National Register is self assigned. Otherwise, returns false.
+   * Returns true if this identification number of the National Register is self assigned, false otherwise.
    *
    * @return bool
    *

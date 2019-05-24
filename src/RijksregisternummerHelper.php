@@ -166,7 +166,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if an identification number of the National Register is a bisnummer. Otherwise, returns false.
+   * Returns true if an identification number of the National Register is a bisnummer, false otherwise.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
@@ -188,7 +188,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if an identification number of the National Register is self assigned. Otherwise, returns false.
+   * Returns true if an identification number of the National Register is self assigned, false otherwise.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
@@ -210,7 +210,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if a string is a valid identification number of the National Register. Otherwise, returns false.
+   * Returns true if a string is a valid identification number of the National Register, false otherwise.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
