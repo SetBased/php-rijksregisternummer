@@ -32,11 +32,9 @@
 </tbody>
 </table>
 
-
-
-#  License
-  
-The project is licensed under the MIT license.
+Detaild information about rijksregisternummer (identification number of the National Register) can be found at:
+* https://nl.wikipedia.org/wiki/Rijksregisternummer
+* https://www.ibz.rrn.fgov.be/fileadmin/user_upload/nl/rr/instructies/IT-lijst/IT000_Rijksregisternummer.pdf
  
 # Usage
 
@@ -66,3 +64,8 @@ Or create an instance.
 $rijksregisternummer = new Rijksregisternummer('93051822361');
 echo $rijksregisternummer->humanFormat(); // '93.05.18-223.61'
 ```
+
+
+#  License
+  
+The project is licensed under the MIT license.
