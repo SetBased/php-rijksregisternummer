@@ -17,7 +17,7 @@ class RijksregisternummerHelperTest extends TestCase
    */
   public function testClean01(): void
   {
-    self::assertSame(null, RijksregisternummerHelper::clean(null));
+    self::assertSame('', RijksregisternummerHelper::clean(null));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ class RijksregisternummerHelperTest extends TestCase
    */
   public function testClean02(): void
   {
-    self::assertSame(null, RijksregisternummerHelper::clean(''));
+    self::assertSame('', RijksregisternummerHelper::clean(''));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

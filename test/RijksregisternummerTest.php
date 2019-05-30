@@ -166,6 +166,17 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test with an invalid rijksregisternummer (null).
+   */
+  public function testInvalid07(): void
+  {
+    $this->expectException(\UnexpectedValueException::class);
+
+    new Rijksregisternummer(null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Tests for is bisnummer.
    */
   public function testIsBis(): void

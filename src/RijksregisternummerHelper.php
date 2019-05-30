@@ -25,18 +25,16 @@ class RijksregisternummerHelper
    * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
    *                                          filtered out. Use '/\D/' the remove all none digits.
    *
-   * @return string|null
+   * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public static function clean(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/'): ?string
+  public static function clean(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/'): string
   {
     $ret = preg_replace($formattingCharacters, '', $rijksregisternummer);
 
-    if ($ret==='') return null;
-
-    return $ret;
+   return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
