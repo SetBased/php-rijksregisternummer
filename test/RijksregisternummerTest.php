@@ -18,13 +18,28 @@ class RijksregisternummerTest extends TestCase
   public function testBirthday(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
+    self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
+    self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
 
     $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
+    self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('2001-02-03', $rijksregisternummer->getBirthday());
+
+    $rijksregisternummer = new Rijksregisternummer('40.00.00-953.81');
+    self::assertFalse($rijksregisternummer->isKnownBirthday());
+    self::assertNull($rijksregisternummer->getBirthday());
+
+    $rijksregisternummer = new Rijksregisternummer('40.00.01-001.33');
+    self::assertFalse($rijksregisternummer->isKnownBirthday());
+    self::assertNull($rijksregisternummer->getBirthday());
+
+    $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
+    self::assertFalse($rijksregisternummer->isKnownBirthday());
+    self::assertNull($rijksregisternummer->getBirthday());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,6 +74,15 @@ class RijksregisternummerTest extends TestCase
 
     $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
     self::assertSame('M', $rijksregisternummer->getGender());
+
+    $rijksregisternummer = new Rijksregisternummer('40.00.00-953.81');
+    self::assertSame('M', $rijksregisternummer->getGender());
+
+    $rijksregisternummer = new Rijksregisternummer('40.00.01-001.33');
+    self::assertSame('M', $rijksregisternummer->getGender());
+
+    $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
+    self::assertSame('M', $rijksregisternummer->getGender());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -72,17 +96,6 @@ class RijksregisternummerTest extends TestCase
 
     $rijksregisternummer = new Rijksregisternummer('93051822361');
     self::assertSame('93.05.18-223.61', $rijksregisternummer->humanFormat());
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Tests for humanFormat.
-   */
-  public function testValidWithoutBirthday(): void
-  {
-    $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
-    self::assertSame('65.00.03-131.77', $rijksregisternummer->humanFormat());
-    self::assertNull($rijksregisternummer->getBirthday());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

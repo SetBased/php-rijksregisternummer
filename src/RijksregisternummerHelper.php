@@ -107,7 +107,8 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday from an identification number of the National Register.
+   * Extracts and returns the birthday in ISO 8601 format from an identification number of the National Register. If and
+   * only if the birthday is unknown returns null.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
@@ -130,8 +131,9 @@ class RijksregisternummerHelper
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
 
-    if (empty($month))
+    if ($month==0)
     {
+      // Birthday is unknown.
       return null;
     }
 
@@ -193,6 +195,19 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true if an identification number of the National Register is based on a known birthday.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return bool
+   */
+  public static function isKnownBirthday(string $rijksregisternummer): bool
+  {
+    return (substr($rijksregisternummer, 2, 2)!='00');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns true if an identification number of the National Register is self assigned, false otherwise.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
@@ -239,17 +254,17 @@ class RijksregisternummerHelper
     }
 
     // Test check part.
-    $part1 = substr($rijksregisternummer, 0, 9);
-    $part2 = substr($rijksregisternummer, 9, 2);
+    $part1 = (int)substr($rijksregisternummer, 0, 9);
+    $part2 = (int)substr($rijksregisternummer, 9, 2);
 
-    $check = 97 - (((int)$part1) % 97);
+    $check = 97 - ($part1 % 97);
     if ($check==$part2)
     {
       $born1900 = true;
     }
     else
     {
-      $check = 97 - ((2000000000 + (int)$part1) % 97);
+      $check = 97 - ((2000000000 + $part1) % 97);
       if ($check!=$part2)
       {
         return false;
@@ -262,14 +277,16 @@ class RijksregisternummerHelper
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
 
-    if (!empty($month))
+    if ($month==0)
     {
-      $month = self::readjustMonth($month);
+      return ((0<=$day && $day<=31) && (1900<=$year && $year<=idate('Y')));
+    }
 
-      if (!checkdate($month, $day, $year))
-      {
-        return false;
-      }
+    $month = self::readjustMonth($month);
+
+    if (!checkdate($month, $day, $year))
+    {
+      return false;
     }
 
     // Test counter. The counter must between 1 and 998.

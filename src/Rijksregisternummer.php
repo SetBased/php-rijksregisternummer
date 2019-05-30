@@ -56,7 +56,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the birthday of this identification number of the National Register.
+   * Extracts and returns the birthday in ISO 8601 format of this identification number of the National Register. If and
+   * only if the birthday is unknown returns null.
    *
    * @return string|null
    *
@@ -113,6 +114,17 @@ class Rijksregisternummer
   public function isBis(): bool
   {
     return RijksregisternummerHelper::isBis($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns true if this identification number is based on a known birthday.
+   *
+   * @return bool
+   */
+  public function isKnownBirthday(): bool
+  {
+    return RijksregisternummerHelper::isKnownBirthday($this->rijksregisternummer);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
