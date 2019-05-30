@@ -111,12 +111,12 @@ class RijksregisternummerHelper
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
-   * @return string
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public static function getBirthday(string $rijksregisternummer): string
+  public static function getBirthday(string $rijksregisternummer): ?string
   {
     // Extract the birthday and sequence parts.
     $part1 = substr($rijksregisternummer, 0, 9);
@@ -129,6 +129,11 @@ class RijksregisternummerHelper
     $year  = (($born1900) ? '19' : '20').substr($rijksregisternummer, 0, 2);
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
+
+    if (empty($month))
+    {
+      return null;
+    }
 
     $month = self::readjustMonth($month);
 
@@ -257,11 +262,14 @@ class RijksregisternummerHelper
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
 
-    $month = self::readjustMonth($month);
-
-    if (!checkdate($month, $day, $year))
+    if (!empty($month))
     {
-      return false;
+      $month = self::readjustMonth($month);
+
+      if (!checkdate($month, $day, $year))
+      {
+        return false;
+      }
     }
 
     // Test counter. The counter must between 1 and 998.

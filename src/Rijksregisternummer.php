@@ -58,12 +58,12 @@ class Rijksregisternummer
   /**
    * Returns the birthday of this identification number of the National Register.
    *
-   * @return string
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public function getBirthday(): string
+  public function getBirthday(): ?string
   {
     return RijksregisternummerHelper::getBirthday($this->rijksregisternummer);
   }

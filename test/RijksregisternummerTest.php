@@ -76,6 +76,17 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Tests for humanFormat.
+   */
+  public function testValidWithoutBirthday()
+  {
+    $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
+    self::assertSame('65.00.03-131.77', $rijksregisternummer->humanFormat());
+    self::assertNull($rijksregisternummer->getBirthday());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test with an invalid rijksregisternummer (invalid check).
    *
    * @expectedException \UnexpectedValueException
