@@ -107,16 +107,17 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday from an identification number of the National Register.
+   * Extracts and returns the birthday in ISO 8601 format from an identification number of the National Register. If and
+   * only if the birthday is unknown returns null.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
    *
-   * @return string
+   * @return string|null
    *
    * @since 1.0.0
    * @api
    */
-  public static function getBirthday(string $rijksregisternummer): string
+  public static function getBirthday(string $rijksregisternummer): ?string
   {
     // Extract the birthday and sequence parts.
     $part1 = substr($rijksregisternummer, 0, 9);
@@ -129,6 +130,12 @@ class RijksregisternummerHelper
     $year  = (($born1900) ? '19' : '20').substr($rijksregisternummer, 0, 2);
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
+
+    if ($month==0)
+    {
+      // Birthday is unknown.
+      return null;
+    }
 
     $month = self::readjustMonth($month);
 
@@ -188,6 +195,19 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns true if an identification number of the National Register is based on a known birthday.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return bool
+   */
+  public static function isKnownBirthday(string $rijksregisternummer): bool
+  {
+    return (substr($rijksregisternummer, 2, 2)!='00');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns true if an identification number of the National Register is self assigned, false otherwise.
    *
    * @param string $rijksregisternummer The clean and valid identification number of the National Register.
@@ -234,17 +254,17 @@ class RijksregisternummerHelper
     }
 
     // Test check part.
-    $part1 = substr($rijksregisternummer, 0, 9);
-    $part2 = substr($rijksregisternummer, 9, 2);
+    $part1 = (int)substr($rijksregisternummer, 0, 9);
+    $part2 = (int)substr($rijksregisternummer, 9, 2);
 
-    $check = 97 - (((int)$part1) % 97);
+    $check = 97 - ($part1 % 97);
     if ($check==$part2)
     {
       $born1900 = true;
     }
     else
     {
-      $check = 97 - ((2000000000 + (int)$part1) % 97);
+      $check = 97 - ((2000000000 + $part1) % 97);
       if ($check!=$part2)
       {
         return false;
@@ -256,6 +276,11 @@ class RijksregisternummerHelper
     $year  = (int)((($born1900) ? '19' : '20').substr($rijksregisternummer, 0, 2));
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
+
+    if ($month==0)
+    {
+      return ((0<=$day && $day<=31) && (1900<=$year && $year<=idate('Y')));
+    }
 
     $month = self::readjustMonth($month);
 
