@@ -15,7 +15,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for extracting birthday
    */
-  public function testBirthday()
+  public function testBirthday(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
@@ -31,7 +31,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for extracting gender.
    */
-  public function testGender()
+  public function testGender(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertSame('F', $rijksregisternummer->getGender());
@@ -65,7 +65,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for humanFormat.
    */
-  public function testHumanFormat()
+  public function testHumanFormat(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertSame('66.04.10-666.60', $rijksregisternummer->humanFormat());
@@ -78,7 +78,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for humanFormat.
    */
-  public function testValidWithoutBirthday()
+  public function testValidWithoutBirthday(): void
   {
     $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
     self::assertSame('65.00.03-131.77', $rijksregisternummer->humanFormat());
@@ -88,66 +88,66 @@ class RijksregisternummerTest extends TestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (invalid check).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid01()
+  public function testInvalid01(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('66.04.10-666.00');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (invalid check).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid02()
+  public function testInvalid02(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('66.04.10-000.47');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (invalid check).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid03()
+  public function testInvalid03(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('66.04.10-999.18');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (invalid birthday).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid04()
+  public function testInvalid04(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('66.02.30-001.14');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (not a number).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid05()
+  public function testInvalid05(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('Rare jongens, die Romeinen');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test with an invalid rijksregisternummer (to many digits).
-   *
-   * @expectedException \UnexpectedValueException
    */
-  public function testInvalid06()
+  public function testInvalid06(): void
   {
+    $this->expectException(\UnexpectedValueException::class);
+
     new Rijksregisternummer('660508123456');
   }
 
@@ -155,7 +155,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for is bisnummer.
    */
-  public function testIsBis()
+  public function testIsBis(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
     self::assertFalse($rijksregisternummer->isBis());
@@ -177,7 +177,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for self assigned.
    */
-  public function testIsSelfAssigned()
+  public function testIsSelfAssigned(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
     self::assertTrue($rijksregisternummer->isSelfAssigned());
@@ -199,7 +199,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for machineFormat.
    */
-  public function testMachineFormat()
+  public function testMachineFormat(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertSame('66041066660', $rijksregisternummer->machineFormat());
@@ -215,7 +215,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Tests for machineFormat.
    */
-  public function testToString()
+  public function testToString(): void
   {
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertSame('66.04.10-666.60', (string)$rijksregisternummer);
@@ -228,7 +228,7 @@ class RijksregisternummerTest extends TestCase
   /**
    * Test with a valid rijksregisternummer.
    */
-  public function testValid01()
+  public function testValid01(): void
   {
     new Rijksregisternummer('66.04.10-666.60');
     self::assertTrue(true);

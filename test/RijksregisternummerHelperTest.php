@@ -15,7 +15,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test clean with null.
    */
-  public function testClean01()
+  public function testClean01(): void
   {
     self::assertSame(null, RijksregisternummerHelper::clean(null));
   }
@@ -24,7 +24,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test clean with empty string.
    */
-  public function testClean02()
+  public function testClean02(): void
   {
     self::assertSame(null, RijksregisternummerHelper::clean(''));
   }
@@ -33,7 +33,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test clean with formatted register number.
    */
-  public function testClean03()
+  public function testClean03(): void
   {
     self::assertSame('66041066600', RijksregisternummerHelper::clean('66.04.10-666.00'));
   }
@@ -42,7 +42,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test clean with unformatted register number.
    */
-  public function testClean04()
+  public function testClean04(): void
   {
     self::assertSame('66041066600', RijksregisternummerHelper::clean('66041066600'));
   }
@@ -51,7 +51,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test clean with register number with rubbish.
    */
-  public function testClean05()
+  public function testClean05(): void
   {
     self::assertSame('66041066600', RijksregisternummerHelper::clean("660 41\n0666-00\x08", '/\D/'));
   }
@@ -59,7 +59,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test computeCheckDigits.
    */
-  public function testComputeCheckDigits()
+  public function testComputeCheckDigits(): void
   {
     $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10', 666);
     self::assertSame('60', $check);
@@ -107,7 +107,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test format with null.
    */
-  public function testFormat01()
+  public function testFormat01(): void
   {
     self::assertSame(null, RijksregisternummerHelper::format(null));
   }
@@ -116,7 +116,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test format with empty string.
    */
-  public function testFormat02()
+  public function testFormat02(): void
   {
     self::assertSame('', RijksregisternummerHelper::format(''));
   }
@@ -125,7 +125,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test format with clean register number.
    */
-  public function testFormat03()
+  public function testFormat03(): void
   {
     self::assertSame('66.04.10-666.00', RijksregisternummerHelper::format('66041066600'));
   }
@@ -134,7 +134,7 @@ class RijksregisternummerHelperTest extends TestCase
   /**
    * Test format with wrong register number.
    */
-  public function testFormat04()
+  public function testFormat04(): void
   {
     self::assertSame('Rare jongens, die Romeinen', RijksregisternummerHelper::format('Rare jongens, die Romeinen'));
   }
