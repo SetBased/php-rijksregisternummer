@@ -32,7 +32,7 @@
 </tbody>
 </table>
 
-Detaild information about rijksregisternummer (identification number of the National Register) can be found at:
+Detailed information about rijksregisternummer (identification number of the National Register) can be found at:
 * https://nl.wikipedia.org/wiki/Rijksregisternummer
 * https://www.ibz.rrn.fgov.be/fileadmin/user_upload/nl/rr/instructies/IT-lijst/IT000_Rijksregisternummer.pdf
  
