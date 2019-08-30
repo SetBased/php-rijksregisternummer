@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace SetBased\Rijksregisternummer;
 
 /**
- * Class for identification number of the National Register (Rijksregisternummer), see @link
- * https://nl.wikipedia.org/wiki/Rijksregisternummer
+ * Class for identification number of the National Register (Rijksregisternummer), see {@link
+ * https://nl.wikipedia.org/wiki/Rijksregisternummer}
  */
 class Rijksregisternummer
 {
@@ -23,7 +23,7 @@ class Rijksregisternummer
    *
    * @param string|null $rijksregisternummer  The identification number of the National Register.
    * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
-   *                                          filtered out. Use '/\D/' the remove all none digits.
+   *                                          filtered out. Use <code>'/\\\\D/'</code> to remove all none digits.
    *
    * @since 1.0.0
    * @api
