@@ -1,4 +1,4 @@
-# Rijksregisternummer
+# Rijksregisternummer / Numéro de Registre National
 
 <table>
 <thead>
