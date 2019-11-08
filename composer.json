@@ -8,14 +8,14 @@
     "BIS"
   ],
   "license": "MIT",
-  "require-dev": {
-    "phing/phing": "^2.0.0",
-    "phpunit/phpunit": "^7.0.0 || ^8.0.0"
-  },
   "require": {
     "php": ">=7.1.0",
     "ext-mbstring": "*",
-    "setbased/exception": "^1.0.0"
+    "setbased/exception": "^2.0.0"
+  },
+  "require-dev": {
+    "phing/phing": "^2.0.0",
+    "phpunit/phpunit": "^7.0.0 || ^8.0.0"
   },
   "autoload": {
     "psr-4": {
