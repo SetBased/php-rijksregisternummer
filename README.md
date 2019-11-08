@@ -1,4 +1,4 @@
-# Rijksregisternummer
+# Rijksregisternummer / Numéro de Registre National
 
 <table>
 <thead>
@@ -32,25 +32,30 @@
 </tbody>
 </table>
 
-
-
-#  License
-  
-The project is licensed under the MIT license.
+Detailed information about identification number of the National Register (NL: rijksregisternummer, FR: numéro de registre national) can be found at:
+* https://nl.wikipedia.org/wiki/Rijksregisternummer
+* https://fr.wikipedia.org/wiki/Numéro_de_registre_national
+* https://www.ibz.rrn.fgov.be/fileadmin/user_upload/nl/rr/instructies/IT-lijst/IT000_Rijksregisternummer.pdf
  
-# Usage
+## Usage
 
 ### Validating a national registry number
 
-Constructing a new `Rijksregisternummer` will throw a `\UnexpectedValueException` if the number is invalid.
+Validate check digits and whether the first digits form a valid date. 
 
 ```php
-try {
-  $rijksregisternummer = new Rijksregisternummer('wrong-value');
-} catch(\UnexpectedValueException $e){
-  // That was invalid
-}
+echo RijksregisternummerHelper::isValid('66041066600'); // true
+echo RijksregisternummerHelper::isValid('66041066601'); // false
 ```
+
+Extract the date of birth from a registry number.
+
+```php
+echo RijksregisternummerHelper::getBirthDay('66.64.10-666.92'); // '1966-04-10'
+echo RijksregisternummerHelper::getBirthDay('40.00.01-001.33'); // null
+```
+
+Also constructing a new `Rijksregisternummer` will throw a `\UnexpectedValueException` if the number is invalid.
 
 ### Formatting a national registry number
 
@@ -66,3 +71,13 @@ Or create an instance.
 $rijksregisternummer = new Rijksregisternummer('93051822361');
 echo $rijksregisternummer->humanFormat(); // '93.05.18-223.61'
 ```
+
+Clean formatting characters from user input.
+
+```php
+echo RijksregisternummerHelper::clean('66.04.10-666.00'); // '66041066600'
+```
+
+##  License
+  
+The project is licensed under the MIT license.
