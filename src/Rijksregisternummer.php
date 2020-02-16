@@ -18,6 +18,7 @@ class Rijksregisternummer
   private $rijksregisternummer;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -69,6 +70,51 @@ class Rijksregisternummer
   public function __toString(): string
   {
     return RijksregisternummerHelper::format($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extracts and returns the day of the month of birth of this identification number of the National Register. If and
+   * only if the day of the month of birth is unknown returns null.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getBirthDayOfMonth(): ?int
+  {
+    return RijksregisternummerHelper::getBirthDatOfMonth($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extracts and returns the month of birth of this identification number of the National Register. If and only
+   * if the month of birth is unknown returns null.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getBirthMonth(): ?int
+  {
+    return RijksregisternummerHelper::getBirthMonth($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extracts and returns the year of birthday of this identification number of the National Register. If and only if
+   * the year of birth is unknown returns null.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getBirthYear(): ?int
+  {
+    return RijksregisternummerHelper::getBirthYear($this->rijksregisternummer);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

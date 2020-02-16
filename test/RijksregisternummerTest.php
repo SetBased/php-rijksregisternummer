@@ -21,26 +21,63 @@ class RijksregisternummerTest extends TestCase
     $rijksregisternummer = new Rijksregisternummer('66.64.10-666.92');
     self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
+    self::assertSame(1966, $rijksregisternummer->getBirthYear());
+    self::assertSame(4, $rijksregisternummer->getBirthMonth());
+    self::assertSame(10, $rijksregisternummer->getBirthDayOfMonth());
 
     $rijksregisternummer = new Rijksregisternummer('66.04.10-666.60');
     self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('1966-04-10', $rijksregisternummer->getBirthday());
+    self::assertSame(1966, $rijksregisternummer->getBirthYear());
+    self::assertSame(4, $rijksregisternummer->getBirthMonth());
+    self::assertSame(10, $rijksregisternummer->getBirthDayOfMonth());
 
     $rijksregisternummer = new Rijksregisternummer('01.02.03-005.66');
     self::assertTrue($rijksregisternummer->isKnownBirthday());
     self::assertSame('2001-02-03', $rijksregisternummer->getBirthday());
+    self::assertSame(2001, $rijksregisternummer->getBirthYear());
+    self::assertSame(2, $rijksregisternummer->getBirthMonth());
+    self::assertSame(3, $rijksregisternummer->getBirthDayOfMonth());
 
+    // Only year birth year is known.
     $rijksregisternummer = new Rijksregisternummer('40.00.00-953.81');
     self::assertFalse($rijksregisternummer->isKnownBirthday());
     self::assertNull($rijksregisternummer->getBirthday());
+    self::assertSame(1940, $rijksregisternummer->getBirthYear());
+    self::assertNull($rijksregisternummer->getBirthMonth());
+    self::assertNull($rijksregisternummer->getBirthDayOfMonth());
 
+    // Only year birth year is known.
     $rijksregisternummer = new Rijksregisternummer('40.00.01-001.33');
     self::assertFalse($rijksregisternummer->isKnownBirthday());
     self::assertNull($rijksregisternummer->getBirthday());
+    self::assertSame(1940, $rijksregisternummer->getBirthYear());
+    self::assertNull($rijksregisternummer->getBirthMonth());
+    self::assertNull($rijksregisternummer->getBirthDayOfMonth());
 
+    // Only year birth year is known.
     $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
     self::assertFalse($rijksregisternummer->isKnownBirthday());
     self::assertNull($rijksregisternummer->getBirthday());
+    self::assertSame(1965, $rijksregisternummer->getBirthYear());
+    self::assertNull($rijksregisternummer->getBirthMonth());
+    self::assertNull($rijksregisternummer->getBirthDayOfMonth());
+
+    // Even year of birth is unknown.
+    $rijksregisternummer = Rijksregisternummer::create('1900-00-01', 123);
+    self::assertFalse($rijksregisternummer->isKnownBirthday());
+    self::assertNull($rijksregisternummer->getBirthday());
+    self::assertNull($rijksregisternummer->getBirthYear());
+    self::assertNull($rijksregisternummer->getBirthMonth());
+    self::assertNull($rijksregisternummer->getBirthDayOfMonth());
+
+    // Even year of birth is unknown.
+    $rijksregisternummer = Rijksregisternummer::create('2000-00-01', 124);
+    self::assertFalse($rijksregisternummer->isKnownBirthday());
+    self::assertNull($rijksregisternummer->getBirthday());
+    self::assertNull($rijksregisternummer->getBirthYear());
+    self::assertNull($rijksregisternummer->getBirthMonth());
+    self::assertNull($rijksregisternummer->getBirthDayOfMonth());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

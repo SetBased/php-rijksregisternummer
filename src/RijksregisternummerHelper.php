@@ -126,6 +126,78 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Extracts and returns the day of the month of birth from an identification number of the National Register. If and
+   * only if the day of the month of birth is unknown returns null.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public static function getBirthDatOfMonth(string $rijksregisternummer): ?int
+  {
+    [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
+
+    if ($month==0)
+    {
+      return null;
+    }
+
+    return $day;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extracts and returns the month of birth from an identification number of the National Register. If and only if the
+   * month birth is unknown returns null.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public static function getBirthMonth(string $rijksregisternummer): ?int
+  {
+    [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
+
+    if ($month==0)
+    {
+      return null;
+    }
+
+    return self::readjustMonth($month);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extracts and returns the year of birth from an identification number of the National Register. If and only if the
+   * year birth is unknown returns null.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return int|null
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public static function getBirthYear(string $rijksregisternummer): ?int
+  {
+    [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
+
+    if (($year==1900 || $year==2000) && $month==0 && $day==1)
+    {
+      return null;
+    }
+
+    return (int)$year;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Extracts and returns the birthday in ISO 8601 format from an identification number of the National Register. If and
    * only if the birthday is unknown returns null.
    *
@@ -138,21 +210,10 @@ class RijksregisternummerHelper
    */
   public static function getBirthday(string $rijksregisternummer): ?string
   {
-    // Extract the birthday and sequence parts.
-    $part1 = substr($rijksregisternummer, 0, 9);
-    $part2 = substr($rijksregisternummer, 9, 2);
-
-    $check    = 97 - (((int)$part1) % 97);
-    $born1900 = ($check==$part2);
-
-    // Test birthday is valid.
-    $year  = (($born1900) ? '19' : '20').substr($rijksregisternummer, 0, 2);
-    $month = (int)substr($rijksregisternummer, 2, 2);
-    $day   = (int)substr($rijksregisternummer, 4, 2);
+    [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
 
     if ($month==0)
     {
-      // Birthday is unknown.
       return null;
     }
 
@@ -352,6 +413,29 @@ class RijksregisternummerHelper
     }
 
     return $month;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Extract the raw year, month, and day of the birthday of an identification number of the National Register.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   *
+   * @return array
+   */
+  private static function extractBirthdayParts(string $rijksregisternummer): array
+  {
+    $part1 = substr($rijksregisternummer, 0, 9);
+    $part2 = substr($rijksregisternummer, 9, 2);
+
+    $check    = 97 - (((int)$part1) % 97);
+    $born1900 = ($check==$part2);
+
+    $year  = (($born1900) ? '19' : '20').substr($rijksregisternummer, 0, 2);
+    $month = (int)substr($rijksregisternummer, 2, 2);
+    $day   = (int)substr($rijksregisternummer, 4, 2);
+
+    return [$year, $month, $day];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
