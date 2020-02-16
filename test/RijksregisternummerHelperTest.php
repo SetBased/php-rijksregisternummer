@@ -100,7 +100,7 @@ class RijksregisternummerHelperTest extends TestCase
     $check = RijksregisternummerHelper::computeCheckDigits('2012-01-20',
                                                            324,
                                                            RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    self::assertSame('43', $check);
+    self::assertSame('75', $check);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

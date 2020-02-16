@@ -42,6 +42,23 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Creates and returns a Rijksregisternummer object.
+   *
+   * @param string $birthday       The birthday in ISO 8601 format.
+   * @param int    $sequenceNumber The sequence number (between 1 and 998, odd for men, even for women).
+   * @param int    $type           The type.
+   *
+   * @return Rijksregisternummer
+   */
+  public static function create(string $birthday,
+                                int $sequenceNumber,
+                                int $type = RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER): Rijksregisternummer
+  {
+    return new self(RijksregisternummerHelper::create($birthday, $sequenceNumber, $type));
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns this identification number of the National Register as a string in yy.mm.dd-nnn.cc format.
    *
    * @return string

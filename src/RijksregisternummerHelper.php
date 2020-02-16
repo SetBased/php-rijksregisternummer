@@ -19,7 +19,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Cleans a identification number of the National Register, i.e. removes all non digits.
+   * Cleans an identification number of the National Register, i.e. removes all non digits.
    *
    * @param string|null $rijksregisternummer  The unclean identification number of the National Register.
    * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
@@ -32,14 +32,12 @@ class RijksregisternummerHelper
    */
   public static function clean(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/'): string
   {
-    $ret = preg_replace($formattingCharacters, '', $rijksregisternummer);
-
-   return $ret;
+    return preg_replace($formattingCharacters, '', $rijksregisternummer);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Computes the check digits for a identification number of the National Register.
+   * Computes the check digits for an identification number of the National Register.
    *
    * @param string $birthday       The birthday in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
    * @param int    $sequenceNumber The sequence number.
@@ -66,7 +64,7 @@ class RijksregisternummerHelper
 
     if ($year>=2000)
     {
-      $number += 2000000000;
+      $number += 2000000;
     }
 
     $number = 1000 * $number + $sequenceNumber;
@@ -74,6 +72,29 @@ class RijksregisternummerHelper
     $check = 97 - $number % 97;
 
     return sprintf('%02d', $check);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Creates and returns an identification number of the National Register.
+   *
+   * @param string $birthday       The birthday in ISO 8601 format.
+   * @param int    $sequenceNumber The sequence number.
+   * @param int    $type           The type.
+   *
+   * @return Rijksregisternummer
+   */
+  public static function create(string $birthday,
+                                int $sequenceNumber,
+                                int $type = self::TYPE_RIJKSREGISTERNUMMER): string
+  {
+    $year2 = (int)substr($birthday, 2, 2);
+    $month = (int)substr($birthday, 5, 2);
+    $day   = (int)substr($birthday, 8, 2);
+    $month = self::adjustMonth($month, $type);
+    $check = self::computeCheckDigits($birthday, $sequenceNumber, $type);
+
+    return sprintf('%02d%02d%02d%03d%02d', $year2, $month, $day, $sequenceNumber, $check);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -312,7 +333,6 @@ class RijksregisternummerHelper
     {
       case self::TYPE_RIJKSREGISTERNUMMER:
         // Nothing to do.
-        ;
         break;
 
       case self::TYPE_BISNUMMER_UNKNOWN_GENDER:
@@ -348,7 +368,6 @@ class RijksregisternummerHelper
     {
       case 1<=$month && $month<=12:
         // A normal rijksregisternummer.
-        ;
         break;
 
       case 21<=$month && $month<=32:

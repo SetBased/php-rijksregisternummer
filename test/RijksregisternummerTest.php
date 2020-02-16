@@ -5,6 +5,7 @@ namespace SetBased\Rijksregisternummer\Test;
 
 use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\Rijksregisternummer;
+use SetBased\Rijksregisternummer\RijksregisternummerHelper;
 
 /**
  * Test cases for Rijksregisternummer.
@@ -40,6 +41,31 @@ class RijksregisternummerTest extends TestCase
     $rijksregisternummer = new Rijksregisternummer('65.00.03-131.77');
     self::assertFalse($rijksregisternummer->isKnownBirthday());
     self::assertNull($rijksregisternummer->getBirthday());
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test for creating rijksregisternummers.
+   */
+  public function testCreate(): void
+  {
+    $rijksregisternummer = Rijksregisternummer::create('1966-04-10', 666, RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
+    self::assertSame($rijksregisternummer->humanFormat(), '66.64.10-666.92');
+
+    $rijksregisternummer = Rijksregisternummer::create('1966-04-10', 666);
+    self::assertSame($rijksregisternummer->humanFormat(), '66.04.10-666.60');
+
+    $rijksregisternummer = Rijksregisternummer::create('2001-02-03', 5);
+    self::assertSame($rijksregisternummer->humanFormat(), '01.02.03-005.66');
+
+    $rijksregisternummer = Rijksregisternummer::create('1940-00-00', 953);
+    self::assertSame($rijksregisternummer->humanFormat(), '40.00.00-953.81');
+
+    $rijksregisternummer = Rijksregisternummer::create('1940-00-01', 1);
+    self::assertSame($rijksregisternummer->humanFormat(), '40.00.01-001.33');
+
+    $rijksregisternummer = Rijksregisternummer::create('1965-00-03', 131);
+    self::assertSame($rijksregisternummer->humanFormat(), '65.00.03-131.77');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
