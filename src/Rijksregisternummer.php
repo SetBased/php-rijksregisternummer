@@ -84,7 +84,7 @@ class Rijksregisternummer
    */
   public function getBirthDayOfMonth(): ?int
   {
-    return RijksregisternummerHelper::getBirthDatOfMonth($this->rijksregisternummer);
+    return RijksregisternummerHelper::getBirthDayOfMonth($this->rijksregisternummer);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

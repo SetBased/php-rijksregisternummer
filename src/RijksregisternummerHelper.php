@@ -136,7 +136,7 @@ class RijksregisternummerHelper
    * @since 1.0.0
    * @api
    */
-  public static function getBirthDatOfMonth(string $rijksregisternummer): ?int
+  public static function getBirthDayOfMonth(string $rijksregisternummer): ?int
   {
     [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
 
