@@ -55,6 +55,25 @@ class RijksregisternummerHelperTest extends TestCase
   {
     self::assertSame('66041066600', RijksregisternummerHelper::clean("660 41\n0666-00\x08", '/\D/'));
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test clean with register number with null.
+   */
+  public function testClean06(): void
+  {
+    self::assertSame('', RijksregisternummerHelper::clean(null));
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test clean with register number with null.
+   */
+  public function testClean07(): void
+  {
+    self::assertSame('0', RijksregisternummerHelper::clean('0'));
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test computeCheckDigits.
