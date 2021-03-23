@@ -32,6 +32,10 @@ class RijksregisternummerHelper
    */
   public static function clean(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/'): string
   {
+    if (!$rijksregisternummer ) {
+      return '';
+    }
+
     return preg_replace($formattingCharacters, '', $rijksregisternummer);
   }
 
