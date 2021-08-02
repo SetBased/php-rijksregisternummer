@@ -11,11 +11,11 @@
   "require": {
     "php": ">=7.4",
     "ext-mbstring": "*",
-    "setbased/exception": "^2.1"
+    "setbased/exception": "^2.2.0"
   },
   "require-dev": {
-    "phing/phing": "^2.0",
-    "phpunit/phpunit": "^9.0"
+    "phing/phing": "^2.16.4",
+    "phpunit/phpunit": "^9.5.8"
   },
   "autoload": {
     "psr-4": {
