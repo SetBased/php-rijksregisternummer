@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=7.3",
+    "php": ">=7.4",
     "ext-mbstring": "*",
     "setbased/exception": "^2.1"
   },
