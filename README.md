@@ -36,6 +36,7 @@ Detailed information about identification number of the National Register (NL: r
 * https://nl.wikipedia.org/wiki/Rijksregisternummer
 * https://fr.wikipedia.org/wiki/Numéro_de_registre_national
 * https://www.ibz.rrn.fgov.be/fileadmin/user_upload/nl/rr/instructies/IT-lijst/IT000_Rijksregisternummer.pdf
+* https://www.ibz.rrn.fgov.be/fileadmin/user_upload/fr/rn/fichier-rn/fichier-RN.pdf
  
 ## Usage
 
