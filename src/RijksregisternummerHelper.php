@@ -6,10 +6,10 @@ namespace SetBased\Rijksregisternummer;
 use SetBased\Exception\FallenException;
 
 /**
- * Utility class for identification number of the National Register (Rijksregisternummer), see @link
- * https://nl.wikipedia.org/wiki/Rijksregisternummer.
+ * Utility class for identification numbers of the National Register (Rijksregisternummer), bisnummers, and
+ * self-assigned identification numbers, see @link https://nl.wikipedia.org/wiki/Rijksregisternummer.
  *
- * This is a low level utility class in the sense that all methods except method isValid() require valid values for the
+ * This is a low level utility class in the sense that all methods except method isValid() require valid values for
  * arguments $rijksregisternummer and $birthday.
  */
 class RijksregisternummerHelper
@@ -37,9 +37,9 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Cleans an identification number of the National Register, i.e. removes all non digits.
+   * Cleans an identification number, i.e. removes all non digits.
    *
-   * @param string|null $rijksregisternummer  The unclean identification number of the National Register.
+   * @param string|null $rijksregisternummer  The unclean identification number.
    * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
    *                                          filtered out. Use '/\D/' the remove all none digits.
    *
@@ -55,7 +55,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Computes the check digits for an identification number of the National Register.
+   * Computes the check digits for an identification number.
    *
    * @param string $birthday       The birthday in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
    * @param int    $sequenceNumber The sequence number.
@@ -93,7 +93,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates and returns an identification number of the National Register.
+   * Creates and returns an identification number.
    *
    * @param string $birthday       The birthday in ISO 8601 format.
    * @param int    $sequenceNumber The sequence number.
@@ -116,9 +116,9 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Formats an identification number of the National Register.
+   * Formats an identification number.
    *
-   * @param string|null $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string|null $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return string|null
    *
@@ -143,10 +143,10 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the day of the month of birth from an identification number of the National Register. If and
-   * only if the day of the month of birth is unknown returns null.
+   * Extracts and returns the day of the month of birth from an identification number. If and only if the day of the
+   * month of birth is unknown returns null.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return int|null
    *
@@ -167,10 +167,10 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the month of birth from an identification number of the National Register. If and only if the
-   * month birth is unknown returns null.
+   * Extracts and returns the month of birth from an identification number. If and only if the month birth is unknown
+   * returns null.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return int|null
    *
@@ -191,10 +191,10 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the year of birth from an identification number of the National Register. If and only if the
-   * year birth is unknown returns null.
+   * Extracts and returns the year of birth from an identification number. If and only if the year birth is unknown
+   * returns null.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return int|null
    *
@@ -205,7 +205,7 @@ class RijksregisternummerHelper
   {
     [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
 
-    if (($year===1900 || $year===2000) && $month===0 && $day===1)
+    if (($year===1900 || $year===2000) && $month===0)
     {
       return null;
     }
@@ -215,10 +215,10 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday in ISO 8601 format from an identification number of the National Register. If and
-   * only if the birthday is unknown returns null.
+   * Extracts and returns the birthday in ISO 8601 format from an identification number. If and only if the birthday is
+   * unknown returns null.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return string|null
    *
@@ -234,21 +234,19 @@ class RijksregisternummerHelper
       return null;
     }
 
-    $month = self::reAdjustMonth($month);
-
     return sprintf('%04d-%02d-%02d', $year, $month, $day);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the gender from an identification number of the National Register.
+   * Extracts and returns the gender from an identification number.
    * <ul>
    * <li> 'M': Male
    * <li> 'F': Female
    * <li> '': Unknown
    * </ul>
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return string
    *
@@ -260,7 +258,7 @@ class RijksregisternummerHelper
     $month          = (int)substr($rijksregisternummer, 2, 2);
     $sequenceNumber = substr($rijksregisternummer, 6, 3);
 
-    if (21<=$month && $month<=32)
+    if (20<=$month && $month<=32)
     {
       return '';
     }
@@ -270,9 +268,64 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether an identification number of the National Register is a bisnummer.
+   * Returns the sequence number of an identification number.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
+   *
+   * @return int
+   *
+   * @since 1.2.0
+   * @api
+   */
+  public static function getSequenceNumber(string $rijksregisternummer): int
+  {
+    return (int)substr($rijksregisternummer, 6, 3);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the type of identification number of an identification number.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
+   *
+   * @return int
+   *
+   * @since 1.2.0
+   * @api
+   */
+  public static function getType(string $rijksregisternummer): int
+  {
+    $month = (int)substr($rijksregisternummer, 2, 2);
+    switch (true)
+    {
+      case 0<=$month && $month<=12:
+        $type = self::TYPE_RIJKSREGISTERNUMMER;
+        break;
+
+      case 20<=$month && $month<=32:
+        $type = self::TYPE_BISNUMMER_UNKNOWN_GENDER;
+        break;
+
+      case 40<=$month && $month<=52:
+        $type = self::TYPE_BISNUMMER_KNOWN_GENDER;
+        break;
+
+      case 60<=$month && $month<=72:
+        $type = self::TYPE_SELF_ASSIGNED;
+        break;
+
+      default:
+        throw new FallenException('month', $month);
+    }
+
+    return $type;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns whether an identification number is a bisnummer.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return bool
    *
@@ -282,32 +335,48 @@ class RijksregisternummerHelper
   public static function isBis(string $rijksregisternummer): bool
   {
     $month = (int)substr($rijksregisternummer, 2, 2);
-    if (21<=$month && $month<=52)
-    {
-      return true;
-    }
 
-    return false;
+    return (20<=$month && $month<=52);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether an identification number of the National Register is based on a known birthday.
+   * Returns whether an identification number is based on a known birthday.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return bool
    */
   public static function isKnownBirthday(string $rijksregisternummer): bool
   {
-    return (substr($rijksregisternummer, 2, 2)!=='00');
+    [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
+
+    return ($month!==0);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether an identification number of the National Register is self-assigned.
+   * Returns whether an identification number is a rijksregisternummer.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
+   *
+   * @return bool
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public static function isRijksregisternummer(string $rijksregisternummer): bool
+  {
+    $month = (int)substr($rijksregisternummer, 2, 2);
+
+    return (0<=$month && $month<=12);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns whether an identification number is self-assigned.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return bool
    *
@@ -317,19 +386,15 @@ class RijksregisternummerHelper
   public static function isSelfAssigned(string $rijksregisternummer): bool
   {
     $month = (int)substr($rijksregisternummer, 2, 2);
-    if (61<=$month && $month<=72)
-    {
-      return true;
-    }
 
-    return false;
+    return (60<=$month && $month<=72);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether a string is a valid identification number of the National Register.
+   * Returns whether a string is a valid identification number.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return bool
    *
@@ -366,20 +431,9 @@ class RijksregisternummerHelper
 
     // Test birthday is valid.
     [$year, $month, $day] = self::extractBirthdayParts($rijksregisternummer);
-    if ($month===0)
+    if ($month!==0 && !checkdate($month, $day, $year))
     {
-      if (!(0<=$day && $day<=31))
-      {
-        return false;
-      }
-    }
-    else
-    {
-      $month = self::reAdjustMonth($month);
-      if (!checkdate($month, $day, $year))
-      {
-        return false;
-      }
+      return false;
     }
 
     // Test counter. The counter must be between 1 and 998.
@@ -394,7 +448,7 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adjust a month by taking into account modifications for bisnummers and self-assigned rijksregisternummers.
+   * Adjust a month by taking into account modifications for bisnummers and self-assigned identification numbers.
    *
    * @param int $month The month number (1..12).
    * @param int $type  The type of identification number.
@@ -430,9 +484,9 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts the raw year, month, and day of the birthday of an identification number of the National Register.
+   * Extracts the raw year, month, and day of the birthday of an identification number.
    *
-   * @param string $rijksregisternummer The clean and valid identification number of the National Register.
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
    * @return array
    */
@@ -448,12 +502,14 @@ class RijksregisternummerHelper
     $month = (int)substr($rijksregisternummer, 2, 2);
     $day   = (int)substr($rijksregisternummer, 4, 2);
 
+    $month = self::reAdjustMonth($month);
+
     return [$year, $month, $day];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adjusts a month by taking into account modifications for bisnummers and self-assigned rijksregisternummers.
+   * Adjusts a month by taking into account modifications for bisnummers and self-assigned identification numbers.
    *
    * @param int $month The month.
    *
@@ -463,21 +519,21 @@ class RijksregisternummerHelper
   {
     switch (true)
     {
-      case 1<=$month && $month<=12:
+      case 0<=$month && $month<=12:
         // A normal rijksregisternummer.
         break;
 
-      case 21<=$month && $month<=32:
+      case 20<=$month && $month<=32:
         // The rijksregisternummer is a bisnummer and gender is unknown.
         $month -= 20;
         break;
 
-      case 41<=$month && $month<=52:
+      case 40<=$month && $month<=52:
         // The rijksregisternummer is a bisnummer and gender is known.
         $month -= 40;
         break;
 
-      case 61<=$month && $month<=72:
+      case 60<=$month && $month<=72:
         // The rijksregisternummer is self assigned.
         $month -= 60;
         break;

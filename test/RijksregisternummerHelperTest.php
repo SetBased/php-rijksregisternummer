@@ -13,149 +13,80 @@ class RijksregisternummerHelperTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with null.
+   * Returns test cases for method clean().
+   *
+   * @return array[]
    */
-  public function testClean01(): void
+  public function getCleanTestCases(): array
   {
-    self::assertSame('', RijksregisternummerHelper::clean(null));
+    return [// Null register number.
+            ['value'    => null,
+             'expected' => ''],
+            // Empty register number.
+            ['value'    => '',
+             'expected' => ''],
+            // Formatted register number
+            ['value'    => '66.04.10-666.00',
+             'expected' => '66041066600'],
+            // Unformatted register number
+            ['value'    => '66041066600',
+             'expected' => '66041066600'],
+            // number with '0'.
+            ['value'    => '0',
+             'expected' => '0']];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with empty string.
+   * Returns test cases for method clean().
+   *
+   * @return array[]
    */
-  public function testClean02(): void
+  public function getFormatTestCases(): array
   {
-    self::assertSame('', RijksregisternummerHelper::clean(''));
+    return [// Null register number.
+            ['value'    => null,
+             'expected' => null],
+            // Empty register number.
+            ['value'    => '',
+             'expected' => ''],
+            // Formatted register number
+            ['value'    => '66041066600',
+             'expected' => '66.04.10-666.00'],
+            //wrong register number
+            ['value'    => 'Rare jongens, die Romeinen',
+             'expected' => 'Rare jongens, die Romeinen']];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with formatted register number.
+   * Test method clean.
+   *
+   * @dataProvider getCleanTestCases
    */
-  public function testClean03(): void
+  public function testClean01(?string $value, string $expected): void
   {
-    self::assertSame('66041066600', RijksregisternummerHelper::clean('66.04.10-666.00'));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test clean with unformatted register number.
-   */
-  public function testClean04(): void
-  {
-    self::assertSame('66041066600', RijksregisternummerHelper::clean('66041066600'));
+    self::assertSame($expected, RijksregisternummerHelper::clean($value));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test clean with register number with rubbish.
    */
-  public function testClean05(): void
+  public function testClean02(): void
   {
     self::assertSame('66041066600', RijksregisternummerHelper::clean("660 41\n0666-00\x08", '/\D/'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with register number with null.
+   * Test format.
+   *
+   * @dataProvider getFormatTestCases
    */
-  public function testClean06(): void
-  {
-    self::assertSame('', RijksregisternummerHelper::clean(null));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test clean with register number with '0'.
-   */
-  public function testClean07(): void
-  {
-    self::assertSame('0', RijksregisternummerHelper::clean('0'));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test computeCheckDigits.
-   */
-  public function testComputeCheckDigits(): void
-  {
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10', 666);
-    self::assertSame('60', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10', 997);
-    self::assertSame('20', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           666,
-                                                           RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER);
-    self::assertSame('06', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           997,
-                                                           RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER);
-    self::assertSame('63', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           666,
-                                                           RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER);
-    self::assertSame('49', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           997,
-                                                           RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER);
-    self::assertSame('09', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           666,
-                                                           RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    self::assertSame('92', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('1966-04-10',
-                                                           997,
-                                                           RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    self::assertSame('52', $check);
-
-    $check = RijksregisternummerHelper::computeCheckDigits('2012-01-20',
-                                                           324,
-                                                           RijksregisternummerHelper::TYPE_SELF_ASSIGNED);
-    self::assertSame('75', $check);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test format with null.
-   */
-  public function testFormat01(): void
+  public function testFormat(?string $value, ?string $expected): void
   {
     self::assertSame(null, RijksregisternummerHelper::format(null));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test format with empty string.
-   */
-  public function testFormat02(): void
-  {
-    self::assertSame('', RijksregisternummerHelper::format(''));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test format with clean register number.
-   */
-  public function testFormat03(): void
-  {
-    self::assertSame('66.04.10-666.00', RijksregisternummerHelper::format('66041066600'));
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test format with wrong register number.
-   */
-  public function testFormat04(): void
-  {
-    self::assertSame('Rare jongens, die Romeinen', RijksregisternummerHelper::format('Rare jongens, die Romeinen'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

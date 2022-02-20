@@ -11,7 +11,7 @@ class Rijksregisternummer
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The identification number of the National Register.
+   * The identification number.
    *
    * @var string
    */
@@ -21,7 +21,7 @@ class Rijksregisternummer
   /**
    * Object constructor.
    *
-   * @param string|null $rijksregisternummer  The identification number of the National Register.
+   * @param string|null $rijksregisternummer  The identification number.
    * @param string      $formattingCharacters A regular expression with allowed formatting characters the must be
    *                                          filtered out. Use <code>'/\\\\D/'</code> to remove all none digits.
    *
@@ -33,7 +33,7 @@ class Rijksregisternummer
     $cleaned = RijksregisternummerHelper::clean($rijksregisternummer, $formattingCharacters);
     if (!RijksregisternummerHelper::isValid($cleaned))
     {
-      $message = sprintf("'%s' is not a valid identification number of the National Register", $rijksregisternummer);
+      $message = sprintf("'%s' is not a valid identification number", $rijksregisternummer);
       throw new \UnexpectedValueException($message);
     }
 
@@ -59,7 +59,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns this identification number of the National Register as a string in yy.mm.dd-nnn.cc format.
+   * Returns this identification number as a string in yy.mm.dd-nnn.cc format.
    *
    * @return string
    *
@@ -73,8 +73,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the day of the month of birth of this identification number of the National Register. If the
-   * day of the month of birth is unknown returns null.
+   * Extracts and returns the day of the month of birth of this identification number. If the day of the month of birth
+   * is unknown returns null.
    *
    * @return int|null
    *
@@ -88,8 +88,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the month of birth of this identification number of the National Register. If the month of
-   * birth is unknown returns null.
+   * Extracts and returns the month of birth of this identification number. If the month of birth is unknown returns
+   * null.
    *
    * @return int|null
    *
@@ -103,8 +103,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the year of birthday of this identification number of the National Register. If the year of
-   * birth is unknown returns null.
+   * Extracts and returns the year of birthday of this identification number. If the year of birth is unknown returns
+   * null.
    *
    * @return int|null
    *
@@ -118,8 +118,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday in ISO 8601 format of this identification number of the National Register. if the
-   * birthday is unknown returns null.
+   * Extracts and returns the birthday in ISO 8601 format of this identification number. If the birthday is unknown
+   * returns null.
    *
    * @return string|null
    *
@@ -133,7 +133,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the gender from this identification number of the National Register.
+   * Extracts and returns the gender from this identification number.
    * <ul>
    * <li> 'M': Male
    * <li> 'F': Female
@@ -152,7 +152,35 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns this identification number of the National Register in human-readable format (yy.mm.dd-nnn.cc).
+   * Returns the sequence number.
+   *
+   * @return int
+   *
+   * @since 1.2.0
+   * @api
+   */
+  public function getSequenceNumber(): int
+  {
+    return RijksregisternummerHelper::getSequenceNumber($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the type of identification number.
+   *
+   * @return int
+   *
+   * @since 1.2.0
+   * @api
+   */
+  public function getType(): int
+  {
+    return RijksregisternummerHelper::getType($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns this identification number in human-readable format (yy.mm.dd-nnn.cc).
    *
    * @return string
    *
@@ -166,7 +194,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether this identification number of the National Register is a bisnummer.
+   * Returns whether this identification number is a bisnummer.
    *
    * @return bool
    *
@@ -191,7 +219,21 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns whether this identification number of the National Register is self-assigned.
+   * Returns whether this identification number is a rijksregisternummer.
+   *
+   * @return bool
+   *
+   * @since 1.2.0
+   * @api
+   */
+  public function isRijksregisternummer(): bool
+  {
+    return RijksregisternummerHelper::isRijksregisternummer($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns whether this identification number is self-assigned.
    *
    * @return bool
    *
@@ -205,7 +247,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns this identification number of the National Register in machine format, i.e. digits only.
+   * Returns this identification number in machine format, i.e. digits only.
    *
    * @return string
    *
