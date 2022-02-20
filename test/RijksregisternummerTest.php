@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SetBased\Rijksregisternummer\Test;
 
 use PHPUnit\Framework\TestCase;
+use SetBased\Exception\FallenException;
 use SetBased\Rijksregisternummer\Rijksregisternummer;
 use SetBased\Rijksregisternummer\RijksregisternummerHelper;
 
@@ -12,6 +13,27 @@ use SetBased\Rijksregisternummer\RijksregisternummerHelper;
  */
 class RijksregisternummerTest extends TestCase
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns invalid Rijksregisternummers.
+   *
+   * @return array[]
+   */
+  public function invalidValues(): array
+  {
+    return [['value' => '66.04.10-666.00'],            // invalid check (born 19xx)
+            ['value' => '10.02.18-066.33'],            // invalid check (born 20xx)
+            ['value' => '66.04.10-000.47'],            // invalid counter (to low)
+            ['value' => '66.04.10-999.18'],            // invalid counter (to high)
+            ['value' => '40.00.32-007.67'],            // invalid day of birth with unknown birth month
+            ['value' => '66.02.30-001.14'],            // invalid birthday
+            ['value' => 'Rare jongens, die Romeinen'], // not a number
+            ['value' => '660508123456'],               // to many digits
+            ['value' => null]                          // null
+
+    ];
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Tests for extracting birthday
@@ -107,6 +129,17 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test create with invalid type.
+   */
+  public function testCreateInvalidType(): void
+  {
+    $this->expectException(FallenException::class);
+
+    Rijksregisternummer::create(date('Y-m-d'), 1, -1);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Tests for extracting gender.
    */
   public function testGender(): void
@@ -163,79 +196,15 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test with an invalid rijksregisternummer (invalid check).
+   * Test with invalid rijksregisternummers.
+   *
+   * @dataProvider invalidValues
    */
-  public function testInvalid01(): void
+  public function testInvalid($value): void
   {
     $this->expectException(\UnexpectedValueException::class);
 
-    new Rijksregisternummer('66.04.10-666.00');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (invalid check).
-   */
-  public function testInvalid02(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer('66.04.10-000.47');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (invalid check).
-   */
-  public function testInvalid03(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer('66.04.10-999.18');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (invalid birthday).
-   */
-  public function testInvalid04(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer('66.02.30-001.14');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (not a number).
-   */
-  public function testInvalid05(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer('Rare jongens, die Romeinen');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (to many digits).
-   */
-  public function testInvalid06(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer('660508123456');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test with an invalid rijksregisternummer (null).
-   */
-  public function testInvalid07(): void
-  {
-    $this->expectException(\UnexpectedValueException::class);
-
-    new Rijksregisternummer(null);
+    new Rijksregisternummer($value);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -262,7 +231,7 @@ class RijksregisternummerTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Tests for self assigned.
+   * Tests for self-assigned.
    */
   public function testIsSelfAssigned(): void
   {

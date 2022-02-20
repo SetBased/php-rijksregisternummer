@@ -15,10 +15,9 @@ class Rijksregisternummer
    *
    * @var string
    */
-  private $rijksregisternummer;
+  private string $rijksregisternummer;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -47,13 +46,13 @@ class Rijksregisternummer
    *
    * @param string $birthday       The birthday in ISO 8601 format.
    * @param int    $sequenceNumber The sequence number (between 1 and 998, odd for men, even for women).
-   * @param int    $type           The type.
+   * @param int    $type           The type of identification number.
    *
    * @return Rijksregisternummer
    */
   public static function create(string $birthday,
-                                int $sequenceNumber,
-                                int $type = RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER): Rijksregisternummer
+                                int    $sequenceNumber,
+                                int    $type = RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER): Rijksregisternummer
   {
     return new self(RijksregisternummerHelper::create($birthday, $sequenceNumber, $type));
   }
@@ -74,8 +73,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the day of the month of birth of this identification number of the National Register. If and
-   * only if the day of the month of birth is unknown returns null.
+   * Extracts and returns the day of the month of birth of this identification number of the National Register. If the
+   * day of the month of birth is unknown returns null.
    *
    * @return int|null
    *
@@ -89,8 +88,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the month of birth of this identification number of the National Register. If and only
-   * if the month of birth is unknown returns null.
+   * Extracts and returns the month of birth of this identification number of the National Register. If the month of
+   * birth is unknown returns null.
    *
    * @return int|null
    *
@@ -104,8 +103,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the year of birthday of this identification number of the National Register. If and only if
-   * the year of birth is unknown returns null.
+   * Extracts and returns the year of birthday of this identification number of the National Register. If the year of
+   * birth is unknown returns null.
    *
    * @return int|null
    *
@@ -119,8 +118,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday in ISO 8601 format of this identification number of the National Register. If and
-   * only if the birthday is unknown returns null.
+   * Extracts and returns the birthday in ISO 8601 format of this identification number of the National Register. if the
+   * birthday is unknown returns null.
    *
    * @return string|null
    *
@@ -153,7 +152,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns this identification number of the National Register in human readable format (yy.mm.dd-nnn.cc).
+   * Returns this identification number of the National Register in human-readable format (yy.mm.dd-nnn.cc).
    *
    * @return string
    *
@@ -167,7 +166,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if this identification number of the National Register is a bisnummer, false otherwise.
+   * Returns whether this identification number of the National Register is a bisnummer.
    *
    * @return bool
    *
@@ -181,7 +180,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if this identification number is based on a known birthday.
+   * Returns whether this identification number is based on a known birthday.
    *
    * @return bool
    */
@@ -192,7 +191,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns true if this identification number of the National Register is self assigned, false otherwise.
+   * Returns whether this identification number of the National Register is self-assigned.
    *
    * @return bool
    *

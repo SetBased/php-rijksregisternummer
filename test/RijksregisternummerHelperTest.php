@@ -67,7 +67,7 @@ class RijksregisternummerHelperTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with register number with null.
+   * Test clean with register number with '0'.
    */
   public function testClean07(): void
   {
