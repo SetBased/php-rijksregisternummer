@@ -130,7 +130,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the check digits of an identification number.
+   * Returns the check digits of this identification number.
    *
    * @return int
    *
