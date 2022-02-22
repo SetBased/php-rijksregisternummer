@@ -50,10 +50,16 @@ class RijksregisternummerHelperTest extends TestCase
             // Empty register number.
             ['value'    => '',
              'expected' => ''],
-            // Formatted register number
+            // Formatted register number.
             ['value'    => '66041066600',
              'expected' => '66.04.10-666.00'],
-            // Wrong register number
+            // To many digits.
+            ['value'    => '660410666000',
+             'expected' => '660410666000'],
+            // Not enough digits.
+            ['value'    => '6041066600',
+             'expected' => '6041066600'],
+            // Wrong register number.
             ['value'    => 'Rare jongens, die Romeinen',
              'expected' => 'Rare jongens, die Romeinen']];
   }

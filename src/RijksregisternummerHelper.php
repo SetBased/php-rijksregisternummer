@@ -127,7 +127,7 @@ class RijksregisternummerHelper
    */
   public static function format(?string $rijksregisternummer): ?string
   {
-    if ($rijksregisternummer===null || strlen($rijksregisternummer)<>11)
+    if ($rijksregisternummer===null || preg_match('/^\d{11}$/', $rijksregisternummer)!==1)
     {
       return $rijksregisternummer;
     }
@@ -272,7 +272,7 @@ class RijksregisternummerHelper
   public static function getGender(string $rijksregisternummer): string
   {
     $month          = (int)substr($rijksregisternummer, 2, 2);
-    $sequenceNumber = substr($rijksregisternummer, 6, 3);
+    $sequenceNumber = (int)substr($rijksregisternummer, 6, 3);
 
     if (20<=$month && $month<=32)
     {
@@ -419,14 +419,8 @@ class RijksregisternummerHelper
    */
   public static function isValid(string $rijksregisternummer): bool
   {
-    // Test the rijksregisternummer has only digits.
-    if (preg_match('/^\d+$/', $rijksregisternummer)!==1)
-    {
-      return false;
-    }
-
-    // Test length is 11.
-    if (strlen($rijksregisternummer)<>11)
+    // Test the rijksregisternummer has exactly 11 digits.
+    if (preg_match('/^\d{11}$/', $rijksregisternummer)!==1)
     {
       return false;
     }
