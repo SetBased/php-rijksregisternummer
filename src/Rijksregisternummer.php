@@ -73,8 +73,8 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the day of the month of birth of this identification number. If the day of the month of birth
-   * is unknown returns null.
+   * Returns the day of the month of birth of this identification number. If the day of the month of birth is unknown
+   * returns null.
    *
    * @return int|null
    *
@@ -88,8 +88,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the month of birth of this identification number. If the month of birth is unknown returns
-   * null.
+   * Returns the month of birth of this identification number. If the month of birth is unknown returns null.
    *
    * @return int|null
    *
@@ -103,8 +102,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the year of birthday of this identification number. If the year of birth is unknown returns
-   * null.
+   * Returns the year of birthday of this identification number. If the year of birth is unknown returns null.
    *
    * @return int|null
    *
@@ -118,8 +116,7 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the birthday in ISO 8601 format of this identification number. If the birthday is unknown
-   * returns null.
+   * Returns the birthday in ISO 8601 format of this identification number. If the birthday is unknown returns null.
    *
    * @return string|null
    *
@@ -133,7 +130,21 @@ class Rijksregisternummer
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Extracts and returns the gender from this identification number.
+   * Returns the check digits of an identification number.
+   *
+   * @return int
+   *
+   * @since 1.3.0
+   * @api
+   */
+  public function getCheckDigits(): int
+  {
+    return RijksregisternummerHelper::getCheckDigits($this->rijksregisternummer);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the gender from this identification number.
    * <ul>
    * <li> 'M': Male
    * <li> 'F': Female

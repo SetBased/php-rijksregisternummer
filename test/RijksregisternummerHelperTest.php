@@ -25,13 +25,13 @@ class RijksregisternummerHelperTest extends TestCase
             // Empty register number.
             ['value'    => '',
              'expected' => ''],
-            // Formatted register number
+            // Formatted register number.
             ['value'    => '66.04.10-666.00',
              'expected' => '66041066600'],
-            // Unformatted register number
+            // Unformatted register number.
             ['value'    => '66041066600',
              'expected' => '66041066600'],
-            // number with '0'.
+            // Number with '0'.
             ['value'    => '0',
              'expected' => '0']];
   }
@@ -53,7 +53,7 @@ class RijksregisternummerHelperTest extends TestCase
             // Formatted register number
             ['value'    => '66041066600',
              'expected' => '66.04.10-666.00'],
-            //wrong register number
+            // Wrong register number
             ['value'    => 'Rare jongens, die Romeinen',
              'expected' => 'Rare jongens, die Romeinen']];
   }
@@ -86,7 +86,7 @@ class RijksregisternummerHelperTest extends TestCase
    */
   public function testFormat(?string $value, ?string $expected): void
   {
-    self::assertSame(null, RijksregisternummerHelper::format(null));
+    self::assertSame($expected, RijksregisternummerHelper::format($value));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -54,6 +54,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 22,
        'getGender'             => 'M',
        'getSequenceNumber'     => 51,
+       'getCheckDigits'        => 81,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: voorbeeld uit IT000_Rijksregisternummer.pdf.
       ['rijksregisternummer'   => '40.00.00-953.81',
@@ -67,6 +68,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 953,
+       'getCheckDigits'        => 81,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: voorbeeld uit IT000_Rijksregisternummer.pdf.
       ['rijksregisternummer'   => '40.00.01-001.33',
@@ -80,6 +82,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 1,
+       'getCheckDigits'        => 33,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: female, known birthday in 19xx.
       ['rijksregisternummer'   => '66.04.10-666.60',
@@ -93,6 +96,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'F',
        'getSequenceNumber'     => 666,
+       'getCheckDigits'        => 60,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, known birthday in 19xx.
       ['rijksregisternummer'   => '66.04.10-997.20',
@@ -106,6 +110,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'M',
        'getSequenceNumber'     => 997,
+       'getCheckDigits'        => 20,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, known birthday in 20xx.
       ['rijksregisternummer'   => '01.02.03-005.66',
@@ -119,6 +124,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 3,
        'getGender'             => 'M',
        'getSequenceNumber'     => 5,
+       'getCheckDigits'        => 66,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, only year birth year is known.
       ['rijksregisternummer'   => '40.00.00-953.81',
@@ -132,6 +138,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 953,
+       'getCheckDigits'        => 81,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, only year birth year is known.
       ['rijksregisternummer'   => '40.00.01-001.33',
@@ -145,6 +152,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 1,
+       'getCheckDigits'        => 33,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, only year birth year is known.
       ['rijksregisternummer'   => '65.00.03-131.77',
@@ -158,6 +166,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 131,
+       'getCheckDigits'        => 77,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: male, unknown year of birth.
       ['rijksregisternummer'   => '00.00.01-123.41',
@@ -171,6 +180,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 123,
+       'getCheckDigits'        => 41,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Rijksregisternummer: female, unknown year of birth.
       ['rijksregisternummer'   => '00.00.01-124.69',
@@ -184,6 +194,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'F',
        'getSequenceNumber'     => 124,
+       'getCheckDigits'        => 69,
        'getType'               => RijksregisternummerHelper::TYPE_RIJKSREGISTERNUMMER],
       // Bisnummer: unknown gender, known birthday.
       ['rijksregisternummer'   => '66.24.10-666.06',
@@ -197,6 +208,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => '',
        'getSequenceNumber'     => 666,
+       'getCheckDigits'        => 6,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER],
       // Bisnummer: unknown gender, known birthday.
       ['rijksregisternummer'   => '66.24.10-666.06',
@@ -210,6 +222,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => '',
        'getSequenceNumber'     => 666,
+       'getCheckDigits'        => 6,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER],
       // Bisnummer: unknown gender, known year of birth.
       ['rijksregisternummer'   => '52.20.01-043.92',
@@ -223,6 +236,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => '',
        'getSequenceNumber'     => 43,
+       'getCheckDigits'        => 92,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER],
       // Bisnummer: unknown gender, unknown year of birth.
       ['rijksregisternummer'   => '00.20.01-016.26',
@@ -236,6 +250,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => '',
        'getSequenceNumber'     => 16,
+       'getCheckDigits'        => 26,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_UNKNOWN_GENDER],
       // Bisnummer: female, known birthday.
       ['rijksregisternummer'   => '66.44.10-666.49',
@@ -249,6 +264,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'F',
        'getSequenceNumber'     => 666,
+       'getCheckDigits'        => 49,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER],
       // Bisnummer: male, known birthday.
       ['rijksregisternummer'   => '66.44.10-997.09',
@@ -262,6 +278,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'M',
        'getSequenceNumber'     => 997,
+       'getCheckDigits'        => 9,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER],
       // Bisnummer: male, unknown year of birth.
       ['rijksregisternummer'   => '00.40.01-033.52',
@@ -275,6 +292,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 33,
+       'getCheckDigits'        => 52,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER],
       // Bisnummer: female, unknown birthday.
       ['rijksregisternummer'   => '00.40.01-008.77',
@@ -288,6 +306,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'F',
        'getSequenceNumber'     => 8,
+       'getCheckDigits'        => 77,
        'getType'               => RijksregisternummerHelper::TYPE_BISNUMMER_KNOWN_GENDER],
       // Self-assigned: female, known birthday.
       ['rijksregisternummer'   => '66.64.10-666.92',
@@ -301,6 +320,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'F',
        'getSequenceNumber'     => 666,
+       'getCheckDigits'        => 92,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
       // Self-assigned: male, known birthday.
       ['rijksregisternummer'   => '66.64.10-997.52',
@@ -314,6 +334,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => 10,
        'getGender'             => 'M',
        'getSequenceNumber'     => 997,
+       'getCheckDigits'        => 52,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
       // Self-assigned: female, known year of birth.
       ['rijksregisternummer'   => '52.60.01-004.23',
@@ -327,6 +348,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'F',
        'getSequenceNumber'     => 4,
+       'getCheckDigits'        => 23,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
       // Self-assigned: male, unknown year of birth.
       ['rijksregisternummer'   => '00.60.01-013.18',
@@ -340,6 +362,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 13,
+       'getCheckDigits'        => 18,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
       // Self-assigned: female, unknown year of birth.
       ['rijksregisternummer'   => '00.60.01-014.17',
@@ -353,6 +376,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'F',
        'getSequenceNumber'     => 14,
+       'getCheckDigits'        => 17,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
       // Self-assigned: female, unknown year of birth, cycled through sequence number.
       ['rijksregisternummer'   => '00.60.02-049.49',
@@ -366,6 +390,7 @@ class RijksregisternummerTest extends TestCase
        'getBirthDayOfMonth'    => null,
        'getGender'             => 'M',
        'getSequenceNumber'     => 49,
+       'getCheckDigits'        => 49,
        'getType'               => RijksregisternummerHelper::TYPE_SELF_ASSIGNED],
     ];
   }
@@ -436,6 +461,7 @@ class RijksregisternummerTest extends TestCase
                             ?int    $getBirthDayOfMonth,
                             string  $getGender,
                             int     $getSequenceNumber,
+                            int     $getCheckDigits,
                             int     $getType): void
   {
     $rijksregisternummer = new Rijksregisternummer($identificationNumber);
@@ -449,6 +475,7 @@ class RijksregisternummerTest extends TestCase
     self::assertSame($getBirthDayOfMonth, $rijksregisternummer->getBirthDayOfMonth());
     self::assertSame($getGender, $rijksregisternummer->getGender());
     self::assertSame($getSequenceNumber, $rijksregisternummer->getSequenceNumber());
+    self::assertSame($getCheckDigits, $rijksregisternummer->getCheckDigits());
     self::assertSame($getType, $rijksregisternummer->getType());
     self::assertSame($identificationNumber, $rijksregisternummer->humanFormat());
     self::assertSame(strtr($identificationNumber, ['-' => '', '.' => '']), $rijksregisternummer->machineFormat());

@@ -239,6 +239,22 @@ class RijksregisternummerHelper
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the check digits of an identification number.
+   *
+   * @param string $rijksregisternummer The clean and valid identification number in machine format.
+   *
+   * @return int
+   *
+   * @since 1.3.0
+   * @api
+   */
+  public static function getCheckDigits(string $rijksregisternummer): int
+  {
+    return (int)substr($rijksregisternummer, 9, 2);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Extracts and returns the gender from an identification number.
    * <ul>
    * <li> 'M': Male
