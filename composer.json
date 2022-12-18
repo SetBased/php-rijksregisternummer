@@ -13,8 +13,8 @@
     "setbased/exception": "^2.2.0"
   },
   "require-dev": {
-    "phing/phing": "^2.16.4",
-    "phpunit/phpunit": "^9.5.8"
+    "phing/phing": "^2.17.4",
+    "phpunit/phpunit": "^9.5.27"
   },
   "autoload": {
     "psr-4": {
