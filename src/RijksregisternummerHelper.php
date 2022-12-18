@@ -50,7 +50,7 @@ class RijksregisternummerHelper
    */
   public static function clean(?string $rijksregisternummer, string $formattingCharacters = '/[\.\-\ ]/'): string
   {
-    return preg_replace($formattingCharacters, '', $rijksregisternummer ?? '');
+    return preg_replace($formattingCharacters, '', $rijksregisternummer ?? '') ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ class RijksregisternummerHelper
    * @param int    $sequenceNumber The sequence number.
    * @param int    $type           The type of identification number.
    *
-   * @return Rijksregisternummer
+   * @return string
    */
   public static function create(string $birthday,
                                 int    $sequenceNumber,
@@ -498,7 +498,7 @@ class RijksregisternummerHelper
    *
    * @param string $rijksregisternummer The clean and valid identification number in machine format.
    *
-   * @return array
+   * @return int[]
    */
   private static function extractBirthdayParts(string $rijksregisternummer): array
   {

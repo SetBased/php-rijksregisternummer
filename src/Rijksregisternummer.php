@@ -68,7 +68,7 @@ class Rijksregisternummer
    */
   public function __toString(): string
   {
-    return RijksregisternummerHelper::format($this->rijksregisternummer);
+    return RijksregisternummerHelper::format($this->rijksregisternummer) ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ class Rijksregisternummer
    */
   public function humanFormat(): string
   {
-    return RijksregisternummerHelper::format($this->rijksregisternummer);
+    return RijksregisternummerHelper::format($this->rijksregisternummer) ?? '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
