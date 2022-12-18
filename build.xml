@@ -1,9 +1,4 @@
 <project name="Rijksregisternummer" default="build" basedir=".">
-    <!-- Runs all unit tests -->
-    <target name="unit">
-        <exec command="bin/phpunit" passthru="true" checkreturn="true"/>
-    </target>
-
     <!-- Run composer update and executes various other updates -->
     <target name="update">
         <exec executable="composer" checkreturn="true" passthru="true">
@@ -11,13 +6,32 @@
             <arg value="update"/>
         </exec>
 
-        <!-- Show outdated packages -->
-        <exec executable="composer" checkreturn="true" passthru="true">
+        <phing phingfile="build.xml" target="outdated" haltonfailure="true"/>
+    </target>
+
+    <!-- Show outdated packages -->
+    <target name="outdated">
+        <exec executable="composer" checkreturn="false" passthru="true">
             <arg value="--ansi"/>
             <arg value="outdated"/>
             <arg value="--direct"/>
         </exec>
     </target>
 
-    <target name="build"/>
+    <!-- Runs code inspection -->
+    <target name="inspection">
+        <exec executable="bin/phpstan" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="analyse"/>
+            <arg value="src"/>
+            <arg value="--level=9"/>
+        </exec>
+    </target>
+
+    <!-- Runs all unit tests -->
+    <target name="unit">
+        <exec executable="bin/phpunit" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="build" depends="update,inspection,unit"/>
 </project>
