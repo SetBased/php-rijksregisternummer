@@ -22,8 +22,8 @@
 <a href="https://packagist.org/packages/setbased/rijksregisternummer"><img src="https://poser.pugx.org/setbased/rijksregisternummer/v/stable" alt="Latest Stable Version"/></a>
 </td>
 <td>
-<a href="https://travis-ci.org/SetBased/php-rijksregisternummer"><img src="https://travis-ci.org/SetBased/php-rijksregisternummer.svg?branch=master" alt="Build Status"/></a><br/>
-<a href="https://scrutinizer-ci.com/g/SetBased/php-rijksregisternummer/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-rijksregisternummer/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+<a href="https://github.com/SetBased/php-rijksregisternummer/actions/workflows/ci.yml"><img src="https://github.com/SetBased/php-rijksregisternummer/actions/workflows/ci.yml/badge.svg" alt="Build Status"/></a><br/>
+<a href="https://codecov.io/gh/SetBased/php-rijksregisternummer"><img src="https://codecov.io/gh/SetBased/php-rijksregisternummer/branch/master/graph/badge.svg" alt="Code Coverage"/></a>
 </td>
 <td>
 <a href="https://scrutinizer-ci.com/g/SetBased/php-rijksregisternummer/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-rijksregisternummer/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a>

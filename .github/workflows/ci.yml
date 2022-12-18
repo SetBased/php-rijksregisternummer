@@ -1,0 +1,52 @@
+on:
+  - "pull_request"
+  - "push"
+
+name: "CI"
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP with extensions"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php-version }}"
+          php_extensions: "xdebug"
+
+      - name: "Cache dependencies installed with Composer"
+        uses: "actions/cache@v2"
+        with:
+          path: "~/.composer/cache"
+          key: "php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}"
+          restore-keys: "php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
+
+      - name: "Install dependencies with Composer"
+        run: "composer update --no-ansi --no-interaction --no-progress"
+
+      - name: "Run tests with PHPUnit"
+        run: "bin/phing unit"
+
+      - name: "Upload to Codecov"
+        uses: "codecov/codecov-action@v2"
+        with:
+          files: "test/coverage.xml"
+          verbose: true
