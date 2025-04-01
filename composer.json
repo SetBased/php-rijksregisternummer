@@ -16,7 +16,6 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "^3.0.0-RC4",
-    "phpstan/phpstan": "^1.9.14",
     "phpunit/phpunit": "^9.5.28"
   },
   "autoload": {
