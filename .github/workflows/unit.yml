@@ -28,10 +28,10 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version:    "${{ matrix.php-version }}"
-          php_extensions: "xdebug"
+          extensions: "xdebug"
 
       - name: "Cache dependencies installed with Composer"
-        uses: "actions/cache@v2"
+        uses: "actions/cache@v4"
         with:
           path:         "~/.composer/cache"
           key:          "php${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}"
