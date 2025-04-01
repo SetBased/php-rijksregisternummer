@@ -15,8 +15,8 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
-    "phing/phing": "^3.0.0-RC4",
-    "phpunit/phpunit": "^9.5.28"
+    "phing/phing": "^3.0.1",
+    "phpunit/phpunit": "^9.6.22"
   },
   "autoload": {
     "psr-4": {
