@@ -18,22 +18,22 @@ class RijksregisternummerHelper
   /**
    * Type of identification number is Rijksregisternummer.
    */
-  const TYPE_RIJKSREGISTERNUMMER = 1;
+  const int TYPE_RIJKSREGISTERNUMMER = 1;
 
   /**
    * Type of identification number is bisnummer with unknown gender.
    */
-  const TYPE_BISNUMMER_UNKNOWN_GENDER = 2;
+  const int TYPE_BISNUMMER_UNKNOWN_GENDER = 2;
 
   /**
    * Type of identification number is bisnummer with known gender.
    */
-  const TYPE_BISNUMMER_KNOWN_GENDER = 4;
+  const int TYPE_BISNUMMER_KNOWN_GENDER = 4;
 
   /**
    * Type of identification number is self-assigned identification number.
    */
-  const TYPE_SELF_ASSIGNED = 5;
+  const int TYPE_SELF_ASSIGNED = 5;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

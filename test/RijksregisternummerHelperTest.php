@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SetBased\Rijksregisternummer\Test;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SetBased\Rijksregisternummer\RijksregisternummerHelper;
 
@@ -17,7 +18,7 @@ class RijksregisternummerHelperTest extends TestCase
    *
    * @return array[]
    */
-  public function getCleanTestCases(): array
+  public static function getCleanTestCases(): array
   {
     return [// Null register number.
             ['value'    => null,
@@ -42,7 +43,7 @@ class RijksregisternummerHelperTest extends TestCase
    *
    * @return array[]
    */
-  public function getFormatTestCases(): array
+  public static function getFormatTestCases(): array
   {
     return [// Null register number.
             ['value'    => null,
@@ -67,9 +68,8 @@ class RijksregisternummerHelperTest extends TestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test method clean.
-   *
-   * @dataProvider getCleanTestCases
    */
+  #[DataProvider('getCleanTestCases')]
   public function testClean01(?string $value, string $expected): void
   {
     self::assertSame($expected, RijksregisternummerHelper::clean($value));
@@ -77,7 +77,7 @@ class RijksregisternummerHelperTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test clean with register number with rubbish.
+   * Test clean with register number with garbage.
    */
   public function testClean02(): void
   {
@@ -87,9 +87,8 @@ class RijksregisternummerHelperTest extends TestCase
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test format.
-   *
-   * @dataProvider getFormatTestCases
    */
+  #[DataProvider('getFormatTestCases')]
   public function testFormat(?string $value, ?string $expected): void
   {
     self::assertSame($expected, RijksregisternummerHelper::format($value));

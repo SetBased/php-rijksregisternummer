@@ -9,14 +9,12 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.3",
     "setbased/exception": "^2.6.0"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
     "phing/phing": "^3.0.1",
-    "phpunit/phpunit": "^9.6.22"
+    "phpunit/phpunit": "^11.5.22"
   },
   "autoload": {
     "psr-4": {
