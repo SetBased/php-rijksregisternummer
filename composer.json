@@ -10,7 +10,7 @@
   "license": "MIT",
   "require": {
     "php": ">=8.2",
-    "setbased/exception": "^2.3.0"
+    "setbased/exception": "^2.6.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
